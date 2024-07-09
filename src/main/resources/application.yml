@@ -1,0 +1,38 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:sqlserver://localhost:1433;databaseName=bxmd;encrypt=true;trustServerCertificate=true;characterEncoding=UTF-8;}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:MyPass@word}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+        format_sql: true
+    database-platform: org.hibernate.dialect.SQLServerDialect
+
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+apiBasePath: /api/v1
+
+security:
+  jwt:
+    auth:
+      header: Authorization
+      prefix: Bearer
+    access-token-expiration-milliseconds: ${ACCESS_TOKEN_EXPIRED:36000}
+    refresh-token-expiration-milliseconds: ${REFRESH_TOKEN_EXPIRED:2592000}
+    secret: ${SECRET_KEY:I6oWsZeW1Kc9cCqIxgcPzQbsffv9Q5afA1ID+XoyIdFdF+Xar+NwqahS4+w5fgqL+meIwSOmMypUlSJEGEUJqA==}
+
+feature-flag:
+  init-user: false
+  init-data: false
