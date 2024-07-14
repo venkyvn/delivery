@@ -23,7 +23,7 @@ abstract class BaseEntity : Serializable {
     var createdDate: Date? = null
 
     @CreatedBy
-    @Column(name = "created_by", nullable = true)
+    @Column(name = "created_by", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8", nullable = true)
     var createdBy: String? = null
 
     @LastModifiedDate
@@ -32,7 +32,16 @@ abstract class BaseEntity : Serializable {
     var updatedDate: Date? = null
 
     @LastModifiedBy
-    @Column(name = "updated_by", nullable = true)
+    @Column(name = "updated_by", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8", nullable = true)
     var updatedBy: String? = null
+
+//    final override fun equals(other: Any?): Boolean {
+//        if (this === other) return true
+//        if (javaClass != other?.javaClass) return false
+//
+//        return id == (other as BaseEntity).id
+//    }
+//
+//    final override fun hashCode(): Int = id.hashCode()
 
 }

@@ -1,9 +1,10 @@
 create table dbo.access_token
 (
-    id            numeric(19) identity primary key,
-    created_by    varchar(255),
+    id            numeric(19) identity
+        primary key,
+    created_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date  datetime,
-    updated_by    varchar(255),
+    updated_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date  datetime,
     account_id    numeric(19),
     expired       datetime,
@@ -15,10 +16,11 @@ go
 
 create table dbo.cbm_freight_prices
 (
-    id            numeric(19) identity primary key,
-    created_by    varchar(255),
+    id            numeric(19) identity
+        primary key,
+    created_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date  datetime,
-    updated_by    varchar(255),
+    updated_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date  datetime,
     code          nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     delivery_time float,
@@ -30,10 +32,11 @@ go
 
 create table dbo.cbm_rates
 (
-    id                   numeric(19) identity primary key,
-    created_by           varchar(255),
+    id                   numeric(19) identity
+        primary key,
+    created_by           nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date         datetime,
-    updated_by           varchar(255),
+    updated_by           nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date         datetime,
     additional_price     numeric(19, 2),
     additional_volume    float,
@@ -49,10 +52,11 @@ go
 
 create table dbo.packaging_cbm_prices
 (
-    id                              numeric(19) identity primary key,
-    created_by                      varchar(255),
+    id                              numeric(19) identity
+        primary key,
+    created_by                      nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date                    datetime,
-    updated_by                      varchar(255),
+    updated_by                      nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date                    datetime,
     additional_price                numeric(19, 2),
     additional_weight_after_packing int,
@@ -66,10 +70,11 @@ go
 
 create table dbo.packaging_prices
 (
-    id           numeric(19) identity primary key,
-    created_by   varchar(255),
+    id           numeric(19) identity
+        primary key,
+    created_by   nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date datetime,
-    updated_by   varchar(255),
+    updated_by   nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date datetime,
     code         nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     discount     float,
@@ -87,10 +92,11 @@ go
 
 create table dbo.regions
 (
-    id           numeric(19) identity primary key,
-    created_by   varchar(255),
+    id           numeric(19) identity
+        primary key,
+    created_by   nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date datetime,
-    updated_by   varchar(255),
+    updated_by   nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date datetime,
     code         nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     name         nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8
@@ -99,10 +105,11 @@ go
 
 create table dbo.provinces
 (
-    id                 numeric(19) identity primary key,
-    created_by         varchar(255),
+    id                 numeric(19) identity
+        primary key,
+    created_by         nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date       datetime,
-    updated_by         varchar(255),
+    updated_by         nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date       datetime,
     code               nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     km                 int,
@@ -117,10 +124,11 @@ go
 
 create table dbo.districts
 (
-    id           numeric(19) identity primary key,
-    created_by   varchar(255),
+    id           numeric(19) identity
+        primary key,
+    created_by   nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date datetime,
-    updated_by   varchar(255),
+    updated_by   nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date datetime,
     code         nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     name         nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
@@ -132,10 +140,11 @@ go
 
 create table dbo.communes
 (
-    id            numeric(19) identity primary key,
-    created_by    varchar(255),
+    id            numeric(19) identity
+        primary key,
+    created_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date  datetime,
-    updated_by    varchar(255),
+    updated_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date  datetime,
     code          nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     name          nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
@@ -148,10 +157,11 @@ go
 
 create table dbo.region_freight_prices
 (
-    id            numeric(19) identity primary key,
-    created_by    varchar(255),
+    id            numeric(19) identity
+        primary key,
+    created_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date  datetime,
-    updated_by    varchar(255),
+    updated_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date  datetime,
     code          nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     delivery_time float,
@@ -167,10 +177,11 @@ go
 
 create table dbo.region_rates
 (
-    id                      numeric(19) identity primary key,
-    created_by              varchar(255),
+    id                      numeric(19) identity
+        primary key,
+    created_by              nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date            datetime,
-    updated_by              varchar(255),
+    updated_by              nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date            datetime,
     additional_price        numeric(19, 2),
     additional_weight       numeric(19, 2),
@@ -186,10 +197,11 @@ go
 
 create table dbo.roles
 (
-    id           numeric(19) identity primary key,
-    created_by   varchar(255),
+    id           numeric(19) identity
+        primary key,
+    created_by   nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date datetime,
-    updated_by   varchar(255),
+    updated_by   nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date datetime,
     name         varchar(255) not null
         constraint UK_ofx66keruapi6vyqpv6f2or37
@@ -199,10 +211,11 @@ go
 
 create table dbo.user_token
 (
-    id            numeric(19) identity primary key,
-    created_by    varchar(255),
+    id            numeric(19) identity
+        primary key,
+    created_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date  datetime,
-    updated_by    varchar(255),
+    updated_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date  datetime,
     refresh_token varchar(500),
     user_id       numeric(19)
@@ -211,10 +224,11 @@ go
 
 create table dbo.users
 (
-    id            numeric(19) identity primary key,
-    created_by    varchar(255),
+    id            numeric(19) identity
+        primary key,
+    created_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     created_date  datetime,
-    updated_by    varchar(255),
+    updated_by    nvarchar(255) collate Latin1_General_100_CI_AS_SC_UTF8,
     updated_date  datetime,
     email         varchar(255)
         constraint UK_6dotkott2kjsp8vw4d0m25fb7
@@ -235,7 +249,8 @@ create table dbo.user_roles
             references dbo.users,
     role_id numeric(19) not null
         constraint FKh8ciramu9cc9q3qcqiv4ue8a6
-            references dbo.roles primary key (user_id, role_id)
+            references dbo.roles,
+    primary key (user_id, role_id)
 )
 go
 

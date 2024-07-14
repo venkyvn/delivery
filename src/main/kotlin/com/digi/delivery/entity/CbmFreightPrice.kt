@@ -8,13 +8,13 @@ import javax.persistence.*
 @Entity
 @Table(name = "cbm_freight_prices")
 class CbmFreightPrice(
-    @Column(name = "name", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
+    @Column(name = "name", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
     var name: String? = null,
 
-    @Column(name = "code", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
+    @Column(name = "code", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
     var code: String? = null,
 
-    @Column(name = "proposal", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
+    @Column(name = "proposal", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
     var proposal: String? = null,
 
     @Column(name = "delivery_time")
