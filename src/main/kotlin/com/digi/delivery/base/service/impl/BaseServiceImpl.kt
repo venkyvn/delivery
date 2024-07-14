@@ -30,6 +30,8 @@ abstract class BaseServiceImpl<D : BaseDto, E : BaseEntity, S : BaseSearchCriter
 
     @Autowired private lateinit var modelMapper: ModelMapper
 
+    val logger = LoggerFactory.getLogger(this::class.java)
+
     private lateinit var env: Environment
 
     init {
@@ -37,13 +39,9 @@ abstract class BaseServiceImpl<D : BaseDto, E : BaseEntity, S : BaseSearchCriter
         this.clazzEntity = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<E>
     }
 
-    protected fun toDTO(e: E): D {
-        return modelMapper.map(e, clazzDto)
-    }
+    protected fun toDTO(e: E): D = modelMapper.map(e, clazzDto)
 
-    protected fun toEntity(dto: D): E {
-        return modelMapper.map(dto, clazzEntity)
-    }
+    protected fun toEntity(dto: D): E = modelMapper.map(dto, clazzEntity)
 
     protected fun toEntity(dto: D, e: E): E {
         modelMapper.map(dto, e)
@@ -69,9 +67,7 @@ abstract class BaseServiceImpl<D : BaseDto, E : BaseEntity, S : BaseSearchCriter
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun isExist(dto: D): Boolean {
-        return repository.existsById(dto.id as I)
-    }
+    override fun isExist(dto: D): Boolean = repository.existsById(dto.id as I)
 
     override fun add(dto: D): D {
         onCreateValidate(dto)
@@ -146,7 +142,7 @@ abstract class BaseServiceImpl<D : BaseDto, E : BaseEntity, S : BaseSearchCriter
     }
 
     protected open fun onUpdateValidate(dto: D): E? {
-        LoggerFactory.getLogger(javaClass).debug("{}", dto)
+        logger.debug("{}", dto)
         return null
     }
 

@@ -8,14 +8,23 @@ import javax.persistence.*
 @Entity
 @Table(name = "regions")
 class Region(
-    @Column(name = "name", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
-    var name: String? = null,
-
     @Column(name = "code", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
     var code: String? = null,
 
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id", referencedColumnName = "id")
+    @Column(name = "name", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
+    var name: String? = null,
+
+    @OneToMany(
+        cascade = [CascadeType.ALL],
+        mappedBy = "region"
+    )
     @Fetch(FetchMode.SUBSELECT)
     var provinces: Set<Province>? = emptySet(),
+
+    @OneToMany(
+        cascade = [CascadeType.ALL],
+        mappedBy = "region"
+    )
+    @Fetch(FetchMode.SUBSELECT)
+    var prices: Set<RegionFreightPrice>? = emptySet(),
 ) : BaseEntity()

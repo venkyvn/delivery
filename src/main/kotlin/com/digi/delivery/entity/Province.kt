@@ -14,17 +14,23 @@ class Province(
     @Column(name = "name", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
     var name: String? = null,
 
-    @Column(name= "km")
+    @Column(name = "km")
     var km: Int? = 0,
 
     @Column(name = "license_plate_code", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
     var licensePlateCode: String? = null,
 
     @Column(name = "route_code", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
-    var routeCode: String?=null,
+    var routeCode: String? = null,
 
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "province_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    var region: Region? = null,
+
+    @OneToMany(
+        cascade = [CascadeType.ALL],
+        mappedBy = "province"
+    )
     @Fetch(FetchMode.SUBSELECT)
     var districts: Set<District>? = emptySet(),
 ) : BaseEntity()

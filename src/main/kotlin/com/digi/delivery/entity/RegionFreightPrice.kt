@@ -14,6 +14,9 @@ class RegionFreightPrice(
     @Column(name = "code", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
     var code: String? = null,
 
+    @Column(name = "label", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
+    var label: String? = null,
+
     @Column(name = "proposal", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
     var proposal: String? = null,
 
@@ -23,9 +26,15 @@ class RegionFreightPrice(
     @Column(name = "discount")
     var discount: Float? = null,
 
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_freight_price_id")
+    @OneToMany(
+        cascade = [CascadeType.ALL], fetch = FetchType.LAZY,
+        mappedBy = "regionFreightPrice"
+    )
     @Fetch(FetchMode.SUBSELECT)
-    var rate: Set<RegionRate> ?= emptySet(),
+    var rates: Set<RegionRate>? = emptySet(),
 
-    ) : BaseEntity()
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    var region: Region? = null,
+
+) : BaseEntity()

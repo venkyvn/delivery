@@ -28,9 +28,11 @@ allOpen {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-logging")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-devtools")
     implementation("com.microsoft.sqlserver:mssql-jdbc:11.2.3.jre17")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -48,12 +50,16 @@ dependencies {
 //    implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-sqlserver")
 
-    implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+//    implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
 //    implementation("ch.qos.logback:logback-classic:1.2.6")
 
     // Swagger/OpenAPI
     implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.6")
+
+    implementation("org.apache.poi:poi-ooxml:5.2.2")
+
+    testImplementation("junit:junit:4.13.1")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 //    runtimeOnly("org.postgresql:postgresql")

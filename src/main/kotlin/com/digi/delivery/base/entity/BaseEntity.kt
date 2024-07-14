@@ -23,7 +23,7 @@ abstract class BaseEntity : Serializable {
     var createdDate: Date? = null
 
     @CreatedBy
-    @Column(name = "created_by", nullable = false)
+    @Column(name = "created_by", nullable = true)
     var createdBy: String? = null
 
     @LastModifiedDate
@@ -32,7 +32,7 @@ abstract class BaseEntity : Serializable {
     var updatedDate: Date? = null
 
     @LastModifiedBy
-    @Column(name = "updated_by", nullable = false)
+    @Column(name = "updated_by", nullable = true)
     var updatedBy: String? = null
 
 }

@@ -34,5 +34,5 @@ security:
     secret: ${SECRET_KEY:I6oWsZeW1Kc9cCqIxgcPzQbsffv9Q5afA1ID+XoyIdFdF+Xar+NwqahS4+w5fgqL+meIwSOmMypUlSJEGEUJqA==}
 
 feature-flag:
-  init-user: false
+  init-user: true
   init-data: false

@@ -26,6 +26,6 @@ class CbmFreightPrice(
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "cbm_freight_price_id")
     @Fetch(FetchMode.SUBSELECT)
-    var rate: Set<CbmRate>? = emptySet(),
+    var rates: Set<CbmRate>? = emptySet(),
 
     ) : BaseEntity()

@@ -15,10 +15,16 @@ class CbmRate(
     @Column(name = "to_volume")
     var toVolume: Float? = null,
 
+    @Column(name = "additional_volume")
+    var additionalVolume: Float? = null,
+
     @Column(name = "price")
     var price: BigDecimal? = BigDecimal.ZERO,
 
     @Column(name = "additional_price")
     var additionalPrice: BigDecimal? = BigDecimal.ZERO,
+
+    @Column(name = "note")
+    var note: String? = null,
 
     ) : BaseEntity()

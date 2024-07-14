@@ -14,8 +14,14 @@ class District(
     @Column(name = "name", columnDefinition = "NVARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8")
     var name: String? = null,
 
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "district_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "province_id")
+    var province: Province? = null,
+
+    @OneToMany(
+        cascade = [CascadeType.ALL],
+        mappedBy = "district"
+    )
     @Fetch(FetchMode.SUBSELECT)
     var communes: Set<Commune>? = emptySet(),
 ) : BaseEntity()

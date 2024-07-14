@@ -3,7 +3,7 @@ package com.digi.delivery.exception
 
 import com.digi.delivery.constant.MessageKey
 import lombok.extern.slf4j.Slf4j
-import mu.KotlinLogging
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.MessageSource
 import org.springframework.dao.ConcurrencyFailureException
@@ -33,7 +33,7 @@ class RestExceptionHandler {
     @Autowired
     private lateinit var messageSource: MessageSource
 
-    private val log = KotlinLogging.logger {}
+    private val log = LoggerFactory.getLogger(this::class.java)
 
     @ExceptionHandler(BusinessException::class)
     fun handleBusinessError(request: HttpServletRequest, e: BusinessException): ResponseEntity<Any> {

@@ -13,10 +13,10 @@ class Commune(
     var name: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cpm_freight_price_id")
-    var cbmFreightPrice: CbmFreightPrice? = null,
+    @JoinColumn(name = "district_id")
+    var district: District? = null,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_freight_price_id")
-    var regionFreightPrice: RegionFreightPrice? = null,
-) : BaseEntity()
+    @Enumerated(EnumType.STRING)
+    var shipmentType: ShipmentType? = ShipmentType.IN_PROVINCE,
+
+    ) : BaseEntity()

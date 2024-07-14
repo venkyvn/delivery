@@ -1,13 +1,16 @@
 package com.digi.delivery.dto
 
-import com.digi.delivery.entity.District
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
-data class ProvinceDto(
-    var code: String? = null,
-    var km: Int? = null,
-    var licensePlateCode: String? = null,
-    var routeCode: String? = null,
-    var name: String? = null,
-    var regionId: Long? = null,
-    var districts: Set<DistrictDto>? = emptySet(),
-) : BaseDto()
+class ProvinceDto() : BaseDto() {
+    var code: String? = null
+    var name: String? = null
+    var km: Int? = 0
+    var licensePlateCode: String? = null
+    var routeCode: String? = null
+
+    @JsonIgnoreProperties("provinces")
+    var region: RegionDto? = null
+    @JsonIgnoreProperties( value = ["province", "communes"])
+    var districts: Set<DistrictDto>? = emptySet()
+}

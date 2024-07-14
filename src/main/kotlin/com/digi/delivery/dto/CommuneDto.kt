@@ -1,9 +1,14 @@
 package com.digi.delivery.dto
 
-data class CommuneDto(
-    var code: String? = null,
-    var name: String? = null,
-    var districtId: Long? = null,
-    var cbmFreightPrice: CbmFreightPriceDto? = null,
-    var regionFreightPrice: RegionFreightPriceDto? = null,
-) : BaseDto()
+import com.digi.delivery.entity.ShipmentType
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+class CommuneDto() : BaseDto() {
+    var code: String? = null
+    var name: String? = null
+
+    @JsonIgnoreProperties("communes")
+    var district: DistrictDto? = null
+    var shipmentType: ShipmentType? = null
+
+}
