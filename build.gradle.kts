@@ -4,17 +4,16 @@ plugins {
     id("org.springframework.boot") version "2.7.4"
     id("io.spring.dependency-management") version "1.0.13.RELEASE"
 
-    kotlin("jvm") version "1.8.21"
+    kotlin("jvm") version "1.7.20"
     kotlin("plugin.spring") version "1.7.20"
     kotlin("plugin.jpa") version "1.7.20"
     kotlin("plugin.allopen") version "1.7.20"
-
-
 }
+
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 group = "com.digi.delivery"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -75,6 +74,58 @@ tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "17" // Target Java 17
+    }
+}
+
+tasks.jar {
+    archiveBaseName = "app"
+    version = "1.0-SNAPSHOT"
+}
+
+tasks.register<Exec>("pullLatestCode") {
+    group = "custom"
+    description = "stash local changes then pull the latest code from git repository"
+    commandLine(
+        "bash", "-c", """
+        git stash &&
+        git fetch --all &&
+        git pull &&
+        git stash pop
+    """.trimIndent()
+    )
+}
+
+tasks.register("checkEnvVariables") {
+    group = "custom"
+    description = "Check required environment variables."
+    doFirst {
+        val requiredVars = listOf("DATABASE_USERNAME", "ACCESS_TOKEN_EXPIRED")
+        requiredVars.forEach {
+            requireNotNull(System.getenv(it)) { "Environment variable $it is not set." }
+        }
+    }
+}
+
+tasks.register("buildApplication") {
+//    dependsOn("checkEnvVariables", "pullLatestCode")
+    dependsOn("pullLatestCode")
+    group = "build"
+    description = "Builds the Kotlin application."
+    doLast {
+        exec {
+            commandLine("./gradlew", "build")
+        }
+    }
+}
+
+tasks.register("runApp") {
+    dependsOn("buildApplication")
+    group = "run"
+    description = "Runs the Kotlin application."
+    doLast {
+        exec {
+            commandLine("java", "-jar", "build/libs/${project.name}-${project.version}-SNAPSHOT.jar")
+        }
     }
 }
 
