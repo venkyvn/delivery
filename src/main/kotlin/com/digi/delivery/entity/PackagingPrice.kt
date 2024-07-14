@@ -9,13 +9,13 @@ import javax.persistence.Table
 @Entity
 @Table(name = "packaging_prices")
 class PackagingPrice(
-    @Column(name = "code", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "code", columnDefinition = "NVARCHAR(255)")
     var code: String? = null,
 
-    @Column(name = "name", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "name", columnDefinition = "NVARCHAR(255)")
     var name: String? = null,
 
-    @Column(name = "label", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "label", columnDefinition = "NVARCHAR(255)")
     var label: String? = null,
 
     @Column(name = "price")

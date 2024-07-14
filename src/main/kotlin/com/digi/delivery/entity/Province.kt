@@ -8,19 +8,19 @@ import javax.persistence.*
 @Entity
 @Table(name = "provinces")
 class Province(
-    @Column(name = "code", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "code", columnDefinition = "NVARCHAR(255)")
     var code: String? = null,
 
-    @Column(name = "name", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "name", columnDefinition = "NVARCHAR(255)")
     var name: String? = null,
 
     @Column(name = "km")
     var km: Int? = 0,
 
-    @Column(name = "license_plate_code", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "license_plate_code", columnDefinition = "NVARCHAR(255)")
     var licensePlateCode: String? = null,
 
-    @Column(name = "route_code", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "route_code", columnDefinition = "NVARCHAR(255)")
     var routeCode: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)

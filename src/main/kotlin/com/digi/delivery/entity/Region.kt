@@ -8,10 +8,10 @@ import javax.persistence.*
 @Entity
 @Table(name = "regions")
 class Region(
-    @Column(name = "code", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "code", columnDefinition = "NVARCHAR(255)")
     var code: String? = null,
 
-    @Column(name = "name", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "name", columnDefinition = "NVARCHAR(255)")
     var name: String? = null,
 
     @OneToMany(

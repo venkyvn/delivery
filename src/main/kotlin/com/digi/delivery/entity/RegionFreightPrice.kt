@@ -8,16 +8,16 @@ import javax.persistence.*
 @Entity
 @Table(name = "region_freight_prices")
 class RegionFreightPrice(
-    @Column(name = "name", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "name", columnDefinition = "NVARCHAR(255)")
     var name: String? = null,
 
-    @Column(name = "code", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "code", columnDefinition = "NVARCHAR(255)")
     var code: String? = null,
 
-    @Column(name = "label", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "label", columnDefinition = "NVARCHAR(255)")
     var label: String? = null,
 
-    @Column(name = "proposal", columnDefinition = "NVARCHAR(255) COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8")
+    @Column(name = "proposal", columnDefinition = "NVARCHAR(255)")
     var proposal: String? = null,
 
     @Column(name = "delivery_time")

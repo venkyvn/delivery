@@ -18,7 +18,7 @@ spring:
     database-platform: org.hibernate.dialect.SQLServerDialect
 
   flyway:
-    enabled: true
+    enabled: false
     locations: classpath:db/migration
     baseline-on-migrate: true
 
