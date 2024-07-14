@@ -82,17 +82,21 @@ tasks.jar {
     version = "1.0-SNAPSHOT"
 }
 
+val isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
+
 tasks.register<Exec>("pullLatestCode") {
     group = "custom"
     description = "stash local changes then pull the latest code from git repository"
-    commandLine(
-        "bash", "-c", """
+    if (isWindows) {
+        commandLine("cmd", "/c", "git stash && git fetch --all && git pull && git stash pop")
+    } else {
+        commandLine("bash", "-c", """
         git stash &&
         git fetch --all &&
         git pull &&
         git stash pop
-    """.trimIndent()
-    )
+    """.trimIndent())
+    }
 }
 
 tasks.register("checkEnvVariables") {
@@ -107,13 +111,18 @@ tasks.register("checkEnvVariables") {
 }
 
 tasks.register("buildApplication") {
-//    dependsOn("checkEnvVariables", "pullLatestCode")
     dependsOn("pullLatestCode")
     group = "build"
     description = "Builds the Kotlin application."
     doLast {
-        exec {
-            commandLine("./gradlew", "build")
+        if (isWindows) {
+            exec {
+                commandLine("cmd", "/c", "gradlew.bat build")
+            }
+        } else {
+            exec {
+                commandLine("./gradlew", "build")
+            }
         }
     }
 }
@@ -128,4 +137,3 @@ tasks.register("runApp") {
         }
     }
 }
-
