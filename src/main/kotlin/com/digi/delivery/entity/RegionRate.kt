@@ -25,9 +25,9 @@ class RegionRate(
     @Column(name = "note")
     var note: String? = null,
 
+    //v
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_freight_price_id")
     var regionFreightPrice: RegionFreightPrice? = null,
-
 
     ) : BaseEntity()

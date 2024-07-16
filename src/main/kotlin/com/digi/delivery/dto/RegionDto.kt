@@ -11,4 +11,5 @@ class RegionDto : BaseDto() {
 
     @JsonIgnoreProperties(value = ["region", "rates"])
     var prices: Set<RegionFreightPriceDto>? = emptySet()
+
 }

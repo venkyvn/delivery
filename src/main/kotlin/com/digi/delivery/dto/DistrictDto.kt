@@ -2,8 +2,7 @@ package com.digi.delivery.dto
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
-class DistrictDto(
-) : BaseDto() {
+class DistrictDto : BaseDto() {
     var code: String? = null
     var name: String? = null
 
@@ -12,5 +11,4 @@ class DistrictDto(
 
     @JsonIgnoreProperties(value = ["district"])
     var communes: Set<CommuneDto>? = emptySet()
-
 }

@@ -2,9 +2,12 @@ package com.digi.delivery.service.impl
 
 import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.base.service.impl.BaseServiceImpl
+import com.digi.delivery.constant.MessageKey
 import com.digi.delivery.dto.ProvinceDto
 import com.digi.delivery.entity.Province
+import com.digi.delivery.exception.BusinessException
 import com.digi.delivery.repository.ProvinceRepository
+import com.digi.delivery.repository.RegionRepository
 import com.digi.delivery.service.ProvinceService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -12,11 +15,50 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
-class ProvinceServiceImpl @Autowired constructor(packageRepository: ProvinceRepository) :
-    BaseServiceImpl<ProvinceDto, Province, BaseSearchCriteria<String>, ProvinceRepository, Long>(packageRepository),
+class ProvinceServiceImpl @Autowired constructor(
+    val provinceRepository: ProvinceRepository,
+    val regionRepository: RegionRepository,
+) :
+    BaseServiceImpl<ProvinceDto, Province, BaseSearchCriteria<String>, ProvinceRepository, Long>(provinceRepository),
     ProvinceService {
-//    override fun update(dto: ProvinceDto): ProvinceDto {
-//        val dtoID = dto.id ?: throw throw BusinessException(MessageKey.BAD_REQUEST)
+    override fun update(dto: ProvinceDto): ProvinceDto {
+        val dtoId = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
+        val provinceEntity = getRepository().findById(dtoId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+
+        updateProvinceFields(provinceEntity, dto)
+        updateRegionAssociation(provinceEntity, dto)
+
+        return toDTO(provinceRepository.save(provinceEntity))
+    }
+
+    private fun updateProvinceFields(provinceEntity: Province, dto: ProvinceDto) {
+        provinceEntity.apply {
+            code = dto.code
+            name = dto.name
+            km = dto.km
+            licensePlateCode = dto.licensePlateCode
+            routeCode = dto.routeCode
+        }
+    }
+
+    private fun updateRegionAssociation(entity: Province, dto: ProvinceDto) {
+        val newRegionId = dto.region?.id
+        val currentRegionId = entity.region?.id
+
+        when {
+            newRegionId == null && currentRegionId != null -> entity.region = null
+
+            newRegionId != null && newRegionId != currentRegionId -> {
+                val regionEntity =
+                    regionRepository.findById(newRegionId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+                entity.region = regionEntity
+
+            }
+        }
+    }
+
+    //    override fun update(dto: ProvinceDto): ProvinceDto {
+//        val dtoID = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
 //        val entity = getRepository().findById(dtoID).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
 //        entity.apply {
 //            label = dto.label

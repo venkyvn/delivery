@@ -14,14 +14,13 @@ class District(
     @Column(name = "name", columnDefinition = "NVARCHAR(255)")
     var name: String? = null,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //v
+    @ManyToOne
     @JoinColumn(name = "province_id")
     var province: Province? = null,
 
-    @OneToMany(
-        cascade = [CascadeType.ALL],
-        mappedBy = "district"
-    )
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @JoinColumn(name = "district_id", referencedColumnName = "id")
     @Fetch(FetchMode.SUBSELECT)
-    var communes: Set<Commune>? = emptySet(),
+    var communes: Set<Commune> = emptySet(),
 ) : BaseEntity()

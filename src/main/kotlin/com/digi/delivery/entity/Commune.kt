@@ -12,7 +12,8 @@ class Commune(
     @Column(name = "name", columnDefinition = "NVARCHAR(255)")
     var name: String? = null,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //v
+    @ManyToOne
     @JoinColumn(name = "district_id")
     var district: District? = null,
 

@@ -7,8 +7,8 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 
-data class SetPasswordDto(
-    private var token: String? = null,
+class SetPasswordDto {
+    private var token: String? = null
 
     @Pattern(regexp = ValidatorConstant.PASSWORD_REGEX_EXPRESSION, message = MessageKey.PASSWORD_NOT_MATCH_PATTERN)
     @NotBlank(message = MessageKey.VALIDATION_NOT_EMPTY)
@@ -18,5 +18,6 @@ data class SetPasswordDto(
         max = ValidatorConstant.PASSWORD_MAX_LENGTH,
         message = MessageKey.VALIDATION_MAX_LENGTH
     )
-    private var newPassword: String? = null,
-)
+    private var newPassword: String? = null
+
+}

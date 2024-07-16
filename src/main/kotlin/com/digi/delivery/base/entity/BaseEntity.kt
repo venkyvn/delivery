@@ -34,14 +34,18 @@ abstract class BaseEntity : Serializable {
     @LastModifiedBy
     @Column(name = "updated_by", columnDefinition = "NVARCHAR(255)", nullable = true)
     var updatedBy: String? = null
+    final override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
 
-//    final override fun equals(other: Any?): Boolean {
-//        if (this === other) return true
-//        if (javaClass != other?.javaClass) return false
-//
-//        return id == (other as BaseEntity).id
-//    }
-//
-//    final override fun hashCode(): Int = id.hashCode()
+        other as BaseEntity
+
+        return id == other.id
+    }
+
+    final override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
 
 }

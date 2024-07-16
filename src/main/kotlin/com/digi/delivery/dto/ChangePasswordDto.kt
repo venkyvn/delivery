@@ -7,19 +7,22 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 
-data class ChangePasswordDto(
+class ChangePasswordDto {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @NotBlank(message = MessageKey.VALIDATION_NOT_EMPTY) @Size(
+    @NotBlank(message = MessageKey.VALIDATION_NOT_EMPTY)
+    @Size(
         min = ValidatorConstant.PASSWORD_MIN_LENGTH,
         max = ValidatorConstant.PASSWORD_MAX_LENGTH,
         message = MessageKey.VALIDATION_MAX_LENGTH
     )
-    var curPassword: String? = null,
+    var curPassword: String? = null
 
     @Pattern(
         regexp = ValidatorConstant.PASSWORD_REGEX_EXPRESSION,
         message = MessageKey.PASSWORD_NOT_MATCH_PATTERN
-    ) @NotBlank(message = MessageKey.VALIDATION_NOT_EMPTY) @Size(
+    )
+    @NotBlank(message = MessageKey.VALIDATION_NOT_EMPTY)
+    @Size(
         min = ValidatorConstant.PASSWORD_MIN_LENGTH,
         max = ValidatorConstant.PASSWORD_MAX_LENGTH,
         message = MessageKey.VALIDATION_MAX_LENGTH
@@ -30,5 +33,6 @@ data class ChangePasswordDto(
         max = ValidatorConstant.PASSWORD_MAX_LENGTH,
         message = MessageKey.VALIDATION_MAX_LENGTH
     )
-    val newPassword: String? = null,
-)
+    val newPassword: String? = null
+
+}

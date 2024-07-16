@@ -4,10 +4,10 @@ plugins {
     id("org.springframework.boot") version "2.7.4"
     id("io.spring.dependency-management") version "1.0.13.RELEASE"
 
-    kotlin("jvm") version "1.7.20"
-    kotlin("plugin.spring") version "1.7.20"
-    kotlin("plugin.jpa") version "1.7.20"
-    kotlin("plugin.allopen") version "1.7.20"
+    kotlin("jvm") version "1.9.24"
+    kotlin("plugin.spring") version "1.9.24"
+    kotlin("plugin.jpa") version "1.9.24"
+    kotlin("plugin.allopen") version "1.9.24"
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -31,7 +31,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-devtools")
+    runtimeOnly("org.springframework.boot:spring-boot-devtools")
+
     implementation("com.microsoft.sqlserver:mssql-jdbc:11.2.3.jre17")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -57,8 +58,14 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.6")
 
     implementation("org.apache.poi:poi-ooxml:5.2.2")
+    // JUnit Jupiter API and Engine
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    // Mockito for mocking
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    // Assertions
+    testImplementation("org.assertj:assertj-core:3.18.1")
 
-    testImplementation("junit:junit:4.13.1")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 //    runtimeOnly("org.postgresql:postgresql")

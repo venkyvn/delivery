@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-data class ResponseDto(
+class ResponseDto(
     var transactionTime: String? = null,
     var status: String? = null,
     var data: Any? = null,

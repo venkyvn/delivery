@@ -26,15 +26,14 @@ class RegionFreightPrice(
     @Column(name = "discount")
     var discount: Float? = null,
 
-    @OneToMany(
-        cascade = [CascadeType.ALL], fetch = FetchType.LAZY,
-        mappedBy = "regionFreightPrice"
-    )
+    //v
+    @OneToMany(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "region_freight_price_id", referencedColumnName = "id")
     @Fetch(FetchMode.SUBSELECT)
-    var rates: Set<RegionRate>? = emptySet(),
+    var rates: Set<RegionRate> = emptySet(),
 
+    //v
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     var region: Region? = null,
-
 ) : BaseEntity()

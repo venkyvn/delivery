@@ -3,7 +3,7 @@ package com.digi.delivery.dto
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.math.BigDecimal
 
-class RegionRateDto() : BaseDto() {
+class RegionRateDto : BaseDto() {
     var fromKg: Float? = null
     var toKg: Float? = null
     var price: BigDecimal? = BigDecimal.ZERO

@@ -21,7 +21,7 @@ import javax.transaction.Transactional
 
 @Suppress("UNCHECKED_CAST")
 @Transactional
-abstract class BaseServiceImpl<D : BaseDto, E : BaseEntity, S : BaseSearchCriteria<*>, R : BaseRepository<E, I>, I : Long>(
+open class BaseServiceImpl<D : BaseDto, E : BaseEntity, S : BaseSearchCriteria<*>, R : BaseRepository<E, I>, I : Long>(
     private val repository: BaseRepository<E, I>,
 ) : BaseService<D, E, S, R, I> {
 

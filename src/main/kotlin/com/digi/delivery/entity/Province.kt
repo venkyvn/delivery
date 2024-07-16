@@ -7,30 +7,29 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "provinces")
-class Province(
+class Province : BaseEntity() {
     @Column(name = "code", columnDefinition = "NVARCHAR(255)")
-    var code: String? = null,
+    var code: String? = null
 
     @Column(name = "name", columnDefinition = "NVARCHAR(255)")
-    var name: String? = null,
+    var name: String? = null
 
     @Column(name = "km")
-    var km: Int? = 0,
+    var km: Int? = 0
 
     @Column(name = "license_plate_code", columnDefinition = "NVARCHAR(255)")
-    var licensePlateCode: String? = null,
+    var licensePlateCode: String? = null
 
     @Column(name = "route_code", columnDefinition = "NVARCHAR(255)")
-    var routeCode: String? = null,
+    var routeCode: String? = null
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //v
+    @ManyToOne
     @JoinColumn(name = "region_id")
-    var region: Region? = null,
+    var region: Region? = null
 
-    @OneToMany(
-        cascade = [CascadeType.ALL],
-        mappedBy = "province"
-    )
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @JoinColumn(name = "province_id", referencedColumnName = "id")
     @Fetch(FetchMode.SUBSELECT)
-    var districts: Set<District>? = emptySet(),
-) : BaseEntity()
+    var districts: Set<District> = emptySet()
+}
