@@ -7,6 +7,12 @@ import javax.persistence.*
 @Entity
 @Table(name = "region_rates")
 class RegionRate(
+    @Column(name = "name")
+    var name: String? = null,
+
+    @Column(name = "label")
+    var label: String? = null,
+
     @Column(name = "from_kg")
     var fromKg: Float? = null,
 

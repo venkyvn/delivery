@@ -35,6 +35,8 @@ class RegionRateServiceImpl @Autowired constructor(
 
     private fun updateRegionRateFields(entity: RegionRate, dto: RegionRateDto) {
         entity.apply {
+            name = dto.name
+            label = dto.label
             fromKg = dto.fromKg
             toKg = dto.toKg
             price = dto.price

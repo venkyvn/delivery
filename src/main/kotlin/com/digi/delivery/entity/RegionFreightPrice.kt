@@ -21,7 +21,7 @@ class RegionFreightPrice(
     var proposal: String? = null,
 
     @Column(name = "delivery_time")
-    var deliveryTime: Float? = null,
+    var deliveryTime: String? = null,
 
     @Column(name = "discount")
     var discount: Float? = null,
@@ -30,10 +30,10 @@ class RegionFreightPrice(
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumn(name = "region_freight_price_id", referencedColumnName = "id")
     @Fetch(FetchMode.SUBSELECT)
-    var rates: Set<RegionRate> = emptySet(),
+    var regionPrices: Set<RegionRate> = emptySet(),
 
     //v
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id", referencedColumnName = "id")
     var region: Region? = null,
 ) : BaseEntity()

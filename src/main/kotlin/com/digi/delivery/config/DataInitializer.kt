@@ -55,7 +55,7 @@ class DataInitializer @Autowired constructor(
             RegionFreightPriceDto().apply {
                 name = "regionFreightPriceService 1"
                 region = RegionDto().apply { id = eRegion.id }
-                rates = setOf(
+                regionPrices = setOf(
                     RegionRateDto().apply {
                         fromKg = 1f
                         toKg = 2f

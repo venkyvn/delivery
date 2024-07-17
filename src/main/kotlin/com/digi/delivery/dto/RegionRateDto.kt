@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.math.BigDecimal
 
 class RegionRateDto : BaseDto() {
+    var name: String ?= null
+    var label: String?= null
     var fromKg: Float? = null
     var toKg: Float? = null
     var price: BigDecimal? = BigDecimal.ZERO
@@ -11,7 +13,7 @@ class RegionRateDto : BaseDto() {
     var additionalWeight: BigDecimal? = BigDecimal.ZERO
     var note: String? = null
 
-    @JsonIgnoreProperties("rates", "region")
+    @JsonIgnoreProperties("regionPrices", "region")
     var regionFreightPrice: RegionFreightPriceDto? = null
 
 }

@@ -7,13 +7,13 @@ class RegionFreightPriceDto() : BaseDto() {
     var code: String? = null
     var label: String? = null
     var proposal: String? = null
-    var deliveryTime: Float? = null
+    var deliveryTime: String? = null
     var discount: Float? = null
 
     @JsonIgnoreProperties("regionFreightPrice")
-    var rates: Set<RegionRateDto>? = emptySet()
+    var regionPrices: Set<RegionRateDto>? = emptySet()
 
-    @JsonIgnoreProperties(value = ["prices", "provinces"])
+    @JsonIgnoreProperties(value = ["regionFreightPrice", "provinces"])
     var region: RegionDto? = null
 
 

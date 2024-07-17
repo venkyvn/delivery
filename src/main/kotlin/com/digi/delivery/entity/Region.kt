@@ -21,9 +21,7 @@ class Region : BaseEntity() {
     var provinces: Set<Province> = emptySet()
 
     //v
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id", referencedColumnName = "id")
-    @Fetch(FetchMode.SUBSELECT)
-    var prices: Set<RegionFreightPrice> = emptySet()
+    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "region")
+    var regionFreightPrice: RegionFreightPrice ?= null
 
 }
