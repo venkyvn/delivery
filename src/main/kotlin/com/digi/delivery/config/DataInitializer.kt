@@ -10,7 +10,6 @@ import com.digi.delivery.repository.RoleRepository
 import com.digi.delivery.repository.UserRepository
 import com.digi.delivery.service.*
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component

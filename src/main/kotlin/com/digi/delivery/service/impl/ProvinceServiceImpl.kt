@@ -57,6 +57,13 @@ class ProvinceServiceImpl @Autowired constructor(
         }
     }
 
+    override fun delete(id: Long): ProvinceDto {
+        val entity = onDeleteValidate(id)
+            .apply { region = null }
+        getRepository().delete(entity)
+        return toDTO(entity)
+    }
+
     //    override fun update(dto: ProvinceDto): ProvinceDto {
 //        val dtoID = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
 //        val entity = getRepository().findById(dtoID).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }

@@ -11,7 +11,7 @@ class RegionRateDto : BaseDto() {
     var additionalWeight: BigDecimal? = BigDecimal.ZERO
     var note: String? = null
 
-    @JsonIgnoreProperties("rates")
+    @JsonIgnoreProperties("rates", "region")
     var regionFreightPrice: RegionFreightPriceDto? = null
 
 }

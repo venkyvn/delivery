@@ -6,7 +6,7 @@ class DistrictDto : BaseDto() {
     var code: String? = null
     var name: String? = null
 
-    @JsonIgnoreProperties("districts")
+    @JsonIgnoreProperties("districts", "region")
     var province: ProvinceDto? = null
 
     @JsonIgnoreProperties(value = ["district"])

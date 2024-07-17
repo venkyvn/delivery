@@ -33,6 +33,13 @@ class DistrictServiceImpl @Autowired constructor(
         return toDTO(getRepository().save(districtEntity))
     }
 
+    override fun delete(id: Long): DistrictDto {
+        val entity = onDeleteValidate(id)
+            .apply { province = null }
+        getRepository().delete(entity)
+        return toDTO(entity)
+    }
+
     private fun updateDistrictFields(districtEntity: District, dto: DistrictDto) {
         districtEntity.apply {
             code = dto.code

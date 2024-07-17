@@ -1,7 +1,6 @@
 package com.digi.delivery.dto
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import lombok.AllArgsConstructor
 
 class RegionFreightPriceDto() : BaseDto() {
     var name: String? = null
