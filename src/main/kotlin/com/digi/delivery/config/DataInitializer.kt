@@ -21,7 +21,7 @@ class DataInitializer @Autowired constructor(
     var userRepository: UserRepository,
     var passwordEncoder: PasswordEncoder,
     var featureFlag: FeatureFlag,
-    var excelService: ExcelService,
+//    var excelService: ExcelService,
     var regionService: RegionService,
     var regionFreightPriceService: RegionFreightPriceService,
     var provinceService: ProvinceService,

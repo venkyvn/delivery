@@ -14,6 +14,7 @@ object MessageKey {
     const val CAST_ENUM_ERR = "error.common.cast.enum"
     const val CAST_SEARCH_FILTER_ERR = "error.common.cast.search.filter"
     const val VALIDATION_ERR = "error.common.validation"
+    const val VALIDATION_DUPLICATE_ERR = "error.constraint.validation"
 
     const val USER_NOT_FOUND = "error.user.notfound"
     const val USER_EMAIL_OR_USERNAME_EXISTED = "error.email.username.existed"

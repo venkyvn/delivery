@@ -16,13 +16,32 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional
 class RegionFreightPriceServiceImpl @Autowired constructor(
-    regionFreightPriceRepository: RegionFreightPriceRepository,
+    val regionFreightPriceRepository: RegionFreightPriceRepository,
     val regionRepository: RegionRepository,
 ) :
     BaseServiceImpl<RegionFreightPriceDto, RegionFreightPrice, BaseSearchCriteria<String>, RegionFreightPriceRepository, Long>(
         regionFreightPriceRepository
     ),
     RegionFreightPriceService {
+
+    override fun onCreateValidate(dto: RegionFreightPriceDto) {
+        validateSameRegion(dto)
+        super.onCreateValidate(dto)
+    }
+
+    override fun onUpdateValidate(dto: RegionFreightPriceDto): RegionFreightPrice? {
+        validateSameRegion(dto)
+        return super.onUpdateValidate(dto)
+    }
+
+    private fun validateSameRegion(dto: RegionFreightPriceDto) {
+        dto.region?.id?.run {
+            getRepository()
+            regionFreightPriceRepository.findFirstByRegionId(this)?.run {
+                throw BusinessException(MessageKey.VALIDATION_DUPLICATE_ERR)
+            }
+        }
+    }
 
     override fun update(dto: RegionFreightPriceDto): RegionFreightPriceDto {
         val dtoId = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)

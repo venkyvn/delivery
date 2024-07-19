@@ -2,11 +2,13 @@ package com.digi.delivery.exception
 
 
 import com.digi.delivery.constant.MessageKey
+import com.digi.delivery.constant.MessageKey.VALIDATION_DUPLICATE_ERR
 import lombok.extern.slf4j.Slf4j
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.MessageSource
 import org.springframework.dao.ConcurrencyFailureException
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -110,6 +112,16 @@ class RestExceptionHandler {
             HttpStatus.INTERNAL_SERVER_ERROR.value(),
             MessageKey.SERVER_ERROR,
             messageSource.getMessage(MessageKey.SERVER_ERROR, null, Locale.getDefault()),
+            null
+        )
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException::class)
+    fun handleDataIntegrityViolationException(request: HttpServletRequest, e: DataIntegrityViolationException): ErrorInfo {
+        return ErrorInfo(
+            HttpStatus.BAD_REQUEST.value(),
+            VALIDATION_DUPLICATE_ERR,
+            e.message,
             null
         )
     }

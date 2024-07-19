@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface RegionFreightPriceRepository : BaseRepository<RegionFreightPrice, Long> {
+    fun findFirstByRegionId(id: Long): RegionFreightPrice?
 }

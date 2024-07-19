@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Service
 
-@Service
+//@Service
 class ExcelService {
     init {
         IOUtils.setByteArrayMaxOverride(200 * 1024 * 1024) // 200 MB
     }
 
-    @Autowired
+//    @Autowired
     lateinit var regionFreightPriceRepository: RegionFreightPriceRepository
 
     fun readExcelFile() {
