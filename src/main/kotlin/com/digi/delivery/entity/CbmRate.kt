@@ -2,9 +2,7 @@ package com.digi.delivery.entity
 
 import com.digi.delivery.base.entity.BaseEntity
 import java.math.BigDecimal
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "cbm_rates")
@@ -27,4 +25,8 @@ class CbmRate(
     @Column(name = "note")
     var note: String? = null,
 
-    ) : BaseEntity()
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cbm_freight_price_id")
+    var cbmFreightPrice: CbmFreightPrice? = null
+
+) : BaseEntity()

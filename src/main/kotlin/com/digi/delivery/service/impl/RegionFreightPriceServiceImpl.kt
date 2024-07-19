@@ -35,14 +35,6 @@ class RegionFreightPriceServiceImpl @Autowired constructor(
         return toDTO(getRepository().save(regionFreightPriceEntity))
     }
 
-    override fun delete(id: Long): RegionFreightPriceDto {
-        val entity = onDeleteValidate(id)
-            .apply { region = null }
-        getRepository().delete(entity)
-        return toDTO(entity)
-
-    }
-
     private fun updateRegionAssociation(entity: RegionFreightPrice, dto: RegionFreightPriceDto) {
         val newRegionId = dto.region?.id
         val currentRegionId = entity.region?.id

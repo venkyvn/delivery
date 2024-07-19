@@ -11,6 +11,9 @@ class CbmFreightPrice(
     @Column(name = "name", columnDefinition = "NVARCHAR(255)")
     var name: String? = null,
 
+    @Column(name = "label", columnDefinition = "NVARCHAR(255)")
+    var label: String? = null,
+
     @Column(name = "code", columnDefinition = "NVARCHAR(255)")
     var code: String? = null,
 
@@ -24,8 +27,8 @@ class CbmFreightPrice(
     var discount: Float? = null,
 
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "cbm_freight_price_id")
+    @JoinColumn(name = "cbm_freight_price_id", referencedColumnName = "id")
     @Fetch(FetchMode.SUBSELECT)
-    var rates: Set<CbmRate>? = emptySet(),
+    var cbmRates: Set<CbmRate>? = emptySet(),
 
     ) : BaseEntity()
