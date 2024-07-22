@@ -11,5 +11,5 @@ class RegionFreightPriceDto() : BaseDto() {
     var discount: Float? = null
 
     @JsonIgnoreProperties("regionFreightPrice")
-    var regionPrices: Set<RegionRateDto>? = emptySet()
+    var regionRates: Set<RegionRateDto>? = emptySet()
 }
