@@ -19,9 +19,4 @@ class Region : BaseEntity() {
     @JoinColumn(name = "region_id", referencedColumnName = "id")
     @Fetch(FetchMode.SUBSELECT)
     var provinces: Set<Province> = emptySet()
-
-    //v
-    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "region")
-    var regionFreightPrice: RegionFreightPrice ?= null
-
 }

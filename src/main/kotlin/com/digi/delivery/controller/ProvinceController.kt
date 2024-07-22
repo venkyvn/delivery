@@ -17,7 +17,4 @@ class ProvinceController @Autowired constructor(
     provinceService: ProvinceService,
 ) : BaseController<ProvinceDto, Province, BaseSearchCriteria<String>, ProvinceService, ProvinceRepository, Long>(
     provinceService
-) {
-    
-
-}
+)

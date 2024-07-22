@@ -23,8 +23,9 @@ create table dbo.cbm_freight_prices
     updated_by    nvarchar(255),
     updated_date  datetime,
     code          nvarchar(255),
-    delivery_time float,
+    delivery_time varchar(255),
     discount      float,
+    label         nvarchar(255),
     name          nvarchar(255),
     proposal      nvarchar(255)
 )
@@ -59,10 +60,10 @@ create table dbo.packaging_cbm_prices
     updated_by                      nvarchar(255),
     updated_date                    datetime,
     additional_price                numeric(19, 2),
-    additional_weight_after_packing int,
+    additional_weight_after_packing float,
     code                            nvarchar(255),
     label                           nvarchar(255),
-    max_weight_per_package          int,
+    max_weight_per_package          float,
     name                            nvarchar(255),
     price                           numeric(19, 2)
 )
@@ -90,6 +91,45 @@ create table dbo.packaging_prices
 )
 go
 
+create table dbo.region_freight_prices
+(
+    id            numeric(19) identity
+        primary key,
+    created_by    nvarchar(255),
+    created_date  datetime,
+    updated_by    nvarchar(255),
+    updated_date  datetime,
+    code          nvarchar(255),
+    delivery_time varchar(255),
+    discount      float,
+    label         nvarchar(255),
+    name          nvarchar(255),
+    proposal      nvarchar(255)
+)
+go
+
+create table dbo.region_rates
+(
+    id                      numeric(19) identity
+        primary key,
+    created_by              nvarchar(255),
+    created_date            datetime,
+    updated_by              nvarchar(255),
+    updated_date            datetime,
+    additional_price        numeric(19, 2),
+    additional_weight       numeric(19, 2),
+    from_kg                 float,
+    label                   varchar(255),
+    name                    varchar(255),
+    note                    varchar(255),
+    price                   numeric(19, 2),
+    to_kg                   float,
+    region_freight_price_id numeric(19)
+        constraint FK14ivy9dkjiyl04rbuwb7jlqr7
+            references dbo.region_freight_prices
+)
+go
+
 create table dbo.regions
 (
     id           numeric(19) identity
@@ -105,20 +145,23 @@ go
 
 create table dbo.provinces
 (
-    id                 numeric(19) identity
+    id                      numeric(19) identity
         primary key,
-    created_by         nvarchar(255),
-    created_date       datetime,
-    updated_by         nvarchar(255),
-    updated_date       datetime,
-    code               nvarchar(255),
-    km                 int,
-    license_plate_code nvarchar(255),
-    name               nvarchar(255),
-    route_code         nvarchar(255),
-    region_id          numeric(19)
+    created_by              nvarchar(255),
+    created_date            datetime,
+    updated_by              nvarchar(255),
+    updated_date            datetime,
+    code                    nvarchar(255),
+    km                      int,
+    license_plate_code      nvarchar(255),
+    name                    nvarchar(255),
+    route_code              nvarchar(255),
+    region_id               numeric(19)
         constraint FKr52p9hvmia0r4042b4s4h6qil
-            references dbo.regions
+            references dbo.regions,
+    region_freight_price_id numeric(19)
+        constraint FK2xdv34vbk4ffa7n6ucac2f715
+            references dbo.region_freight_prices
 )
 go
 
@@ -152,46 +195,6 @@ create table dbo.communes
     district_id   numeric(19)
         constraint FK2icy3sshsnesyj7runy3r5brt
             references dbo.districts
-)
-go
-
-create table dbo.region_freight_prices
-(
-    id            numeric(19) identity
-        primary key,
-    created_by    nvarchar(255),
-    created_date  datetime,
-    updated_by    nvarchar(255),
-    updated_date  datetime,
-    code          nvarchar(255),
-    delivery_time float,
-    discount      float,
-    label         nvarchar(255),
-    name          nvarchar(255),
-    proposal      nvarchar(255),
-    region_id     numeric(19)
-        constraint FKd03ix0im90lrwt6ivoq9oqglk
-            references dbo.regions
-)
-go
-
-create table dbo.region_rates
-(
-    id                      numeric(19) identity
-        primary key,
-    created_by              nvarchar(255),
-    created_date            datetime,
-    updated_by              nvarchar(255),
-    updated_date            datetime,
-    additional_price        numeric(19, 2),
-    additional_weight       numeric(19, 2),
-    from_kg                 float,
-    note                    varchar(255),
-    price                   numeric(19, 2),
-    to_kg                   float,
-    region_freight_price_id numeric(19)
-        constraint FK14ivy9dkjiyl04rbuwb7jlqr7
-            references dbo.region_freight_prices
 )
 go
 

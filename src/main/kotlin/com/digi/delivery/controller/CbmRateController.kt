@@ -17,7 +17,4 @@ class CbmRateController @Autowired constructor(
     cbmRateService: CbmRateService,
 ) : BaseController<CbmRateDto, CbmRate, BaseSearchCriteria<String>, CbmRateService, CbmRateRepository, Long>(
     cbmRateService
-) {
-
-
-}
+)

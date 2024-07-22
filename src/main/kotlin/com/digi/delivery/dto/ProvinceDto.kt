@@ -9,9 +9,12 @@ class ProvinceDto : BaseDto() {
     var licensePlateCode: String? = null
     var routeCode: String? = null
 
-    @JsonIgnoreProperties("provinces", "prices")
+    @JsonIgnoreProperties("provinces")
     var region: RegionDto? = null
 
     @JsonIgnoreProperties(value = ["province", "communes"])
     var districts: Set<DistrictDto>? = emptySet()
+
+    @JsonIgnoreProperties(value = ["region", "rates"])
+    var regionFreightPrice: RegionFreightPriceDto ?= null
 }

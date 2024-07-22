@@ -51,24 +51,24 @@ class DataInitializer @Autowired constructor(
             }
         )
 
-        val eRegionPrice = regionFreightPriceService.add(
-            RegionFreightPriceDto().apply {
-                name = "regionFreightPriceService 1"
-                region = RegionDto().apply { id = eRegion.id }
-                regionPrices = setOf(
-                    RegionRateDto().apply {
-                        fromKg = 1f
-                        toKg = 2f
-                        price = BigDecimal.ONE
-                    },
-                    RegionRateDto().apply {
-                        fromKg = 3f
-                        toKg = 4f
-                        price = BigDecimal.TEN
-                    },
-                )
-            }
-        )
+//        val eRegionPrice = regionFreightPriceService.add(
+//            RegionFreightPriceDto().apply {
+//                name = "regionFreightPriceService 1"
+//                region = RegionDto().apply { id = eRegion.id }
+//                regionPrices = setOf(
+//                    RegionRateDto().apply {
+//                        fromKg = 1f
+//                        toKg = 2f
+//                        price = BigDecimal.ONE
+//                    },
+//                    RegionRateDto().apply {
+//                        fromKg = 3f
+//                        toKg = 4f
+//                        price = BigDecimal.TEN
+//                    },
+//                )
+//            }
+//        )
 
         val eDistrict = districtService.add(
             DistrictDto().apply {

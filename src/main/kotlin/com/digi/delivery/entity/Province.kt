@@ -32,4 +32,9 @@ class Province : BaseEntity() {
     @JoinColumn(name = "province_id", referencedColumnName = "id")
     @Fetch(FetchMode.SUBSELECT)
     var districts: Set<District> = emptySet()
+
+    //v
+    @ManyToOne
+    @JoinColumn(name = "region_freight_price_id")
+    var regionFreightPrice: RegionFreightPrice ?= null
 }

@@ -24,57 +24,57 @@ class RegionFreightPriceServiceImpl @Autowired constructor(
     ),
     RegionFreightPriceService {
 
-    override fun onCreateValidate(dto: RegionFreightPriceDto) {
-        validateSameRegion(dto)
-        super.onCreateValidate(dto)
-    }
+//    override fun onCreateValidate(dto: RegionFreightPriceDto) {
+//        validateSameRegion(dto)
+//        super.onCreateValidate(dto)
+//    }
+//
+//    override fun onUpdateValidate(dto: RegionFreightPriceDto): RegionFreightPrice? {
+//        validateSameRegion(dto)
+//        return super.onUpdateValidate(dto)
+//    }
 
-    override fun onUpdateValidate(dto: RegionFreightPriceDto): RegionFreightPrice? {
-        validateSameRegion(dto)
-        return super.onUpdateValidate(dto)
-    }
+//    private fun validateSameRegion(dto: RegionFreightPriceDto) {
+//        dto.region?.id?.run {
+//            getRepository()
+//            regionFreightPriceRepository.findFirstByRegionId(this)?.run {
+//                throw BusinessException(MessageKey.VALIDATION_DUPLICATE_ERR)
+//            }
+//        }
+//    }
 
-    private fun validateSameRegion(dto: RegionFreightPriceDto) {
-        dto.region?.id?.run {
-            getRepository()
-            regionFreightPriceRepository.findFirstByRegionId(this)?.run {
-                throw BusinessException(MessageKey.VALIDATION_DUPLICATE_ERR)
-            }
-        }
-    }
+//    override fun update(dto: RegionFreightPriceDto): RegionFreightPriceDto {
+//        val dtoId = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
+//        val regionFreightPriceEntity =
+//            getRepository().findById(dtoId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+//
+//        regionFreightPriceFields(regionFreightPriceEntity, dto)
+//        updateRegionAssociation(regionFreightPriceEntity, dto)
+//
+//        return toDTO(getRepository().save(regionFreightPriceEntity))
+//    }
 
-    override fun update(dto: RegionFreightPriceDto): RegionFreightPriceDto {
-        val dtoId = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
-        val regionFreightPriceEntity =
-            getRepository().findById(dtoId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+//    override fun delete(id: Long): RegionFreightPriceDto {
+//        val entity = onDeleteValidate(id)
+//            .apply { region = null }
+//        getRepository().delete(entity)
+//        return toDTO(entity)
+//
+//    }
 
-        regionFreightPriceFields(regionFreightPriceEntity, dto)
-        updateRegionAssociation(regionFreightPriceEntity, dto)
-
-        return toDTO(getRepository().save(regionFreightPriceEntity))
-    }
-
-    override fun delete(id: Long): RegionFreightPriceDto {
-        val entity = onDeleteValidate(id)
-            .apply { region = null }
-        getRepository().delete(entity)
-        return toDTO(entity)
-
-    }
-
-    private fun updateRegionAssociation(entity: RegionFreightPrice, dto: RegionFreightPriceDto) {
-        val newRegionId = dto.region?.id
-        val currentRegionId = entity.region?.id
-
-        when {
-            newRegionId == null && currentRegionId != null -> entity.region = null
-
-            newRegionId != null && newRegionId != currentRegionId -> {
-                entity.region =
-                    regionRepository.findById(newRegionId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
-            }
-        }
-    }
+//    private fun updateRegionAssociation(entity: RegionFreightPrice, dto: RegionFreightPriceDto) {
+//        val newRegionId = dto.region?.id
+//        val currentRegionId = entity.region?.id
+//
+//        when {
+//            newRegionId == null && currentRegionId != null -> entity.region = null
+//
+//            newRegionId != null && newRegionId != currentRegionId -> {
+//                entity.region =
+//                    regionRepository.findById(newRegionId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+//            }
+//        }
+//    }
 
     private fun regionFreightPriceFields(regionFreightPrice: RegionFreightPrice, dto: RegionFreightPriceDto) {
         regionFreightPrice.apply {

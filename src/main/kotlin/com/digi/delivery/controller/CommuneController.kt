@@ -17,7 +17,4 @@ class CommuneController @Autowired constructor(
     communeService: CommuneService,
 ) : BaseController<CommuneDto, Commune, BaseSearchCriteria<String>, CommuneService, CommuneRepository, Long>(
     communeService
-) {
-    
-
-}
+)

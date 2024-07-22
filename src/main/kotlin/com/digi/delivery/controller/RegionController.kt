@@ -17,7 +17,4 @@ class RegionController @Autowired constructor(
     regionService: RegionService,
 ) : BaseController<RegionDto, Region, BaseSearchCriteria<String>, RegionService, RegionRepository, Long>(
     regionService
-) {
-    
-
-}
+)

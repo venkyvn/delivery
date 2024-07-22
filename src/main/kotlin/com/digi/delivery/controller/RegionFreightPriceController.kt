@@ -17,7 +17,4 @@ class RegionFreightPriceController @Autowired constructor(
     regionFreightPriceService: RegionFreightPriceService,
 ) : BaseController<RegionFreightPriceDto, RegionFreightPrice, BaseSearchCriteria<String>, RegionFreightPriceService, RegionFreightPriceRepository, Long>(
     regionFreightPriceService
-) {
-    
-
-}
+)

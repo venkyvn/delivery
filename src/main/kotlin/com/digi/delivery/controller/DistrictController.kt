@@ -17,7 +17,4 @@ class DistrictController @Autowired constructor(
     districtService: DistrictService,
 ) : BaseController<DistrictDto, District, BaseSearchCriteria<String>, DistrictService, DistrictRepository, Long>(
     districtService
-) {
-    
-
-}
+)

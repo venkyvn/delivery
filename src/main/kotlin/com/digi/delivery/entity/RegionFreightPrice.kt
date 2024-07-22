@@ -31,9 +31,4 @@ class RegionFreightPrice(
     @JoinColumn(name = "region_freight_price_id", referencedColumnName = "id")
     @Fetch(FetchMode.SUBSELECT)
     var regionRates: Set<RegionRate> = emptySet(),
-
-    //v
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "region_id", referencedColumnName = "id")
-    var region: Region? = null,
 ) : BaseEntity()

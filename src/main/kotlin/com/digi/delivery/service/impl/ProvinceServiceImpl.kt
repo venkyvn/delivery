@@ -7,6 +7,7 @@ import com.digi.delivery.dto.ProvinceDto
 import com.digi.delivery.entity.Province
 import com.digi.delivery.exception.BusinessException
 import com.digi.delivery.repository.ProvinceRepository
+import com.digi.delivery.repository.RegionFreightPriceRepository
 import com.digi.delivery.repository.RegionRepository
 import com.digi.delivery.service.ProvinceService
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional
 class ProvinceServiceImpl @Autowired constructor(
     val provinceRepository: ProvinceRepository,
     val regionRepository: RegionRepository,
+    val regionFreightPriceRepository: RegionFreightPriceRepository,
 ) :
     BaseServiceImpl<ProvinceDto, Province, BaseSearchCriteria<String>, ProvinceRepository, Long>(provinceRepository),
     ProvinceService {
@@ -27,8 +29,25 @@ class ProvinceServiceImpl @Autowired constructor(
 
         updateProvinceFields(provinceEntity, dto)
         updateRegionAssociation(provinceEntity, dto)
+        updateRegionFreightPriceAssociation(provinceEntity, dto)
 
         return toDTO(provinceRepository.save(provinceEntity))
+    }
+
+    private fun updateRegionFreightPriceAssociation(entity: Province, dto: ProvinceDto) {
+        val newRegionFreightId = dto.regionFreightPrice?.id
+        val currentRegionFreightId = entity.regionFreightPrice?.id
+
+        when {
+            newRegionFreightId == null && currentRegionFreightId != null -> entity.regionFreightPrice = null
+
+            newRegionFreightId != null && newRegionFreightId != currentRegionFreightId -> {
+                val regionFreightPriceEntity =
+                    regionFreightPriceRepository.findById(newRegionFreightId)
+                        .orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+                entity.regionFreightPrice = regionFreightPriceEntity
+            }
+        }
     }
 
     private fun updateProvinceFields(provinceEntity: Province, dto: ProvinceDto) {
@@ -59,7 +78,10 @@ class ProvinceServiceImpl @Autowired constructor(
 
     override fun delete(id: Long): ProvinceDto {
         val entity = onDeleteValidate(id)
-            .apply { region = null }
+            .apply {
+                region = null
+                regionFreightPrice = null
+            }
         getRepository().delete(entity)
         return toDTO(entity)
     }

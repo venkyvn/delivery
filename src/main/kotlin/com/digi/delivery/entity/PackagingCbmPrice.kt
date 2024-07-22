@@ -22,10 +22,10 @@ class PackagingCbmPrice(
     var price: BigDecimal? = BigDecimal.ZERO,
 
     @Column(name = "additional_weight_after_packing")
-    var additionalWeightAfterPacking: Int? = null,
+    var additionalWeightAfterPacking: Float? = null,
     
     @Column(name = "max_weight_per_package")
-    var maxWeightPerPackage: Int? = null,
+    var maxWeightPerPackage: Float? = null,
 
     @Column(name = "additional_price")
     var additionalPrice: BigDecimal? = BigDecimal.ZERO,

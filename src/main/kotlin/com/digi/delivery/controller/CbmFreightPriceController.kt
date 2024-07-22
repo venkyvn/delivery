@@ -17,7 +17,4 @@ class CbmFreightPriceController @Autowired constructor(
     cbmFreightPriceService: CbmFreightPriceService,
 ) : BaseController<CbmFreightPriceDto, CbmFreightPrice, BaseSearchCriteria<String>, CbmFreightPriceService, CbmFreightPriceRepository, Long>(
     cbmFreightPriceService
-) {
-    
-
-}
+)
