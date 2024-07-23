@@ -16,12 +16,14 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional
 class CommuneServiceImpl @Autowired constructor(
-    communeRepository: CommuneRepository,
+    val communeRepository: CommuneRepository,
     val districtRepository: DistrictRepository,
 ) :
     BaseServiceImpl<CommuneDto, Commune, BaseSearchCriteria<String>, CommuneRepository, Long>(communeRepository),
     CommuneService {
-
+    override fun findAll(): List<CommuneDto> {
+        return toDTOs(communeRepository.findAll())
+    }
     override fun update(dto: CommuneDto): CommuneDto {
         val dtoId = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
         val communeEntity =

@@ -7,7 +7,7 @@ class CommuneDto : BaseDto() {
     var code: String? = null
     var name: String? = null
 
-    @JsonIgnoreProperties("communes", "province")
+    @JsonIgnoreProperties("communes")
     var district: DistrictDto? = null
     var shipmentType: ShipmentType? = null
 }

@@ -6,6 +6,7 @@ import com.digi.delivery.constant.MessageKey
 import com.digi.delivery.dto.ProvinceDto
 import com.digi.delivery.entity.Province
 import com.digi.delivery.exception.BusinessException
+import com.digi.delivery.repository.CbmFreightPriceRepository
 import com.digi.delivery.repository.ProvinceRepository
 import com.digi.delivery.repository.RegionFreightPriceRepository
 import com.digi.delivery.repository.RegionRepository
@@ -20,6 +21,7 @@ class ProvinceServiceImpl @Autowired constructor(
     val provinceRepository: ProvinceRepository,
     val regionRepository: RegionRepository,
     val regionFreightPriceRepository: RegionFreightPriceRepository,
+    val cbmFreightPriceRepository: CbmFreightPriceRepository,
 ) :
     BaseServiceImpl<ProvinceDto, Province, BaseSearchCriteria<String>, ProvinceRepository, Long>(provinceRepository),
     ProvinceService {
@@ -30,8 +32,25 @@ class ProvinceServiceImpl @Autowired constructor(
         updateProvinceFields(provinceEntity, dto)
         updateRegionAssociation(provinceEntity, dto)
         updateRegionFreightPriceAssociation(provinceEntity, dto)
+        updateCbmFreightPriceAssociation(provinceEntity, dto)
 
         return toDTO(provinceRepository.save(provinceEntity))
+    }
+
+    private fun updateCbmFreightPriceAssociation(entity: Province, dto: ProvinceDto) {
+        val newCbmFreightId = dto.cbmFreightPrice?.id
+        val currentCbmFreightId = entity.cbmFreightPrice?.id
+
+        when {
+            newCbmFreightId == null && currentCbmFreightId != null -> entity.cbmFreightPrice = null
+
+            newCbmFreightId != null && newCbmFreightId != currentCbmFreightId -> {
+                val cbmFreightPriceEntity =
+                    cbmFreightPriceRepository.findById(newCbmFreightId)
+                        .orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+                entity.cbmFreightPrice = cbmFreightPriceEntity
+            }
+        }
     }
 
     private fun updateRegionFreightPriceAssociation(entity: Province, dto: ProvinceDto) {
@@ -81,6 +100,7 @@ class ProvinceServiceImpl @Autowired constructor(
             .apply {
                 region = null
                 regionFreightPrice = null
+                cbmFreightPrice = null
             }
         getRepository().delete(entity)
         return toDTO(entity)

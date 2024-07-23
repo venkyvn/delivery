@@ -37,4 +37,8 @@ class Province : BaseEntity() {
     @ManyToOne
     @JoinColumn(name = "region_freight_price_id")
     var regionFreightPrice: RegionFreightPrice ?= null
+
+    @ManyToOne
+    @JoinColumn(name = "cbm_freight_price_id")
+    var cbmFreightPrice: CbmFreightPrice ?= null
 }
