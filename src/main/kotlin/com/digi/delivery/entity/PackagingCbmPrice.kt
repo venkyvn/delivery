@@ -23,11 +23,29 @@ class PackagingCbmPrice(
 
     @Column(name = "additional_weight_after_packing")
     var additionalWeightAfterPacking: Float? = null,
-    
+
     @Column(name = "max_weight_per_package")
     var maxWeightPerPackage: Float? = null,
 
     @Column(name = "additional_price")
     var additionalPrice: BigDecimal? = BigDecimal.ZERO,
+
+    @Column(name ="from_cbm")
+    var fromCbm: Float? = null,
+
+    @Column(name ="to_cbm")
+    var toCbm: Float? = null,
+
+    @Column(name ="max_cbm")
+    var maxCbm: Boolean? = false,
+
+    @Column(name ="vat")
+    var vat: Float? = null,
+
+    @Column(name ="price_coefficient")
+    var priceCoefficient: Float? = null,
+
+    @Column(name ="note")
+    var note: String? = null,
 
     ) : BaseEntity()

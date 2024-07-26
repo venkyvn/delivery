@@ -18,6 +18,12 @@ class PackagingPrice(
     @Column(name = "label", columnDefinition = "NVARCHAR(255)")
     var label: String? = null,
 
+    @Column(name = "size")
+    var size: String? = null,
+
+    @Column(name = "unit")
+    var unit: String? = null,
+
     @Column(name = "price")
     var price: BigDecimal? = BigDecimal.ZERO,
 
@@ -38,6 +44,9 @@ class PackagingPrice(
 
     @Column(name = "discount")
     var discount: Float? = null,
+
+    @Column(name = "vat")
+    var vat: Float? = null,
 
     @Column(name = "note")
     var note: String? = null,

@@ -28,7 +28,7 @@ open class BaseServiceImpl<D : BaseDto, E : BaseEntity, S : BaseSearchCriteria<*
     private val clazzDto: Class<D>
     private val clazzEntity: Class<E>
 
-    @Autowired private lateinit var modelMapper: ModelMapper
+    @Autowired protected lateinit var modelMapper: ModelMapper
 
     val logger = LoggerFactory.getLogger(this::class.java)
 

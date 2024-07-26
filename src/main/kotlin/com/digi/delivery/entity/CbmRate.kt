@@ -26,7 +26,7 @@ class CbmRate(
     var note: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cbm_freight_price_id")
-    var cbmFreightPrice: CbmFreightPrice? = null
+    @JoinColumn(name = "region_freight_price_id")
+    var regionFreightPrice: RegionFreightPrice? = null
 
 ) : BaseEntity()

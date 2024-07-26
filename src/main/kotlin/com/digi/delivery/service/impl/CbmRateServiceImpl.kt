@@ -4,11 +4,10 @@ import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.base.service.impl.BaseServiceImpl
 import com.digi.delivery.constant.MessageKey
 import com.digi.delivery.dto.CbmRateDto
-import com.digi.delivery.dto.RegionFreightPriceDto
 import com.digi.delivery.entity.CbmRate
 import com.digi.delivery.exception.BusinessException
-import com.digi.delivery.repository.CbmFreightPriceRepository
 import com.digi.delivery.repository.CbmRateRepository
+import com.digi.delivery.repository.RegionFreightPriceRepository
 import com.digi.delivery.service.CbmRateService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -18,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class CbmRateServiceImpl @Autowired constructor(
     cbmRate: CbmRateRepository,
-    val cbmFreightPriceRepository: CbmFreightPriceRepository,
+    val regionFreightPriceRepository: RegionFreightPriceRepository
 ) :
     BaseServiceImpl<CbmRateDto, CbmRate, BaseSearchCriteria<String>, CbmRateRepository, Long>(cbmRate),
     CbmRateService {
@@ -29,14 +28,14 @@ class CbmRateServiceImpl @Autowired constructor(
             getRepository().findById(dtoId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
 
         updateCbmRateFields(regionRateEntity, dto)
-        UpdateCbmFreightAssociation(regionRateEntity, dto)
+        updateRegionFreightAssociation(regionRateEntity, dto)
 
         return toDTO(getRepository().save(regionRateEntity))
     }
 
     override fun delete(id: Long): CbmRateDto {
         val entity = onDeleteValidate(id)
-            .apply { cbmFreightPrice = null }
+            .apply { regionFreightPrice = null }
         getRepository().delete(entity)
         return toDTO(entity)
     }
@@ -52,16 +51,16 @@ class CbmRateServiceImpl @Autowired constructor(
         }
     }
 
-    private fun UpdateCbmFreightAssociation(entity: CbmRate, dto: CbmRateDto) {
-        val newCbmFreightPriceId = dto.cbmFreightPrice?.id
-        val currentCbmFreightPriceId = entity.cbmFreightPrice?.id
+    private fun updateRegionFreightAssociation(entity: CbmRate, dto: CbmRateDto) {
+        val newCbmFreightPriceId = dto.regionFreightPrice?.id
+        val currentCbmFreightPriceId = entity.regionFreightPrice?.id
 
         when {
-            newCbmFreightPriceId == null && currentCbmFreightPriceId != null -> entity.cbmFreightPrice = null
+            newCbmFreightPriceId == null && currentCbmFreightPriceId != null -> entity.regionFreightPrice = null
 
             newCbmFreightPriceId != null && newCbmFreightPriceId != currentCbmFreightPriceId -> {
-                entity.cbmFreightPrice =
-                    cbmFreightPriceRepository.findById(newCbmFreightPriceId)
+                entity.regionFreightPrice =
+                    regionFreightPriceRepository.findById(newCbmFreightPriceId)
                         .orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
             }
         }

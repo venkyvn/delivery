@@ -1,5 +1,6 @@
 package com.digi.delivery.dto
 
+import com.digi.delivery.entity.CbmRate
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 class RegionFreightPriceDto() : BaseDto() {
@@ -10,6 +11,9 @@ class RegionFreightPriceDto() : BaseDto() {
     var deliveryTime: String? = null
     var discount: Float? = null
 
-    @JsonIgnoreProperties("regionFreightPrice")
+    @JsonIgnoreProperties("regionFreightPrice", "regionFreightPrice")
     var regionRates: Set<RegionRateDto>? = emptySet()
+
+    @JsonIgnoreProperties("regionFreightPrice", "regionFreightPrice")
+    var cbmRates: Set<CbmRateDto>? = emptySet()
 }

@@ -31,4 +31,9 @@ class RegionFreightPrice(
     @JoinColumn(name = "region_freight_price_id", referencedColumnName = "id")
     @Fetch(FetchMode.SUBSELECT)
     var regionRates: Set<RegionRate> = emptySet(),
+
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_freight_price_id", referencedColumnName = "id")
+    @Fetch(FetchMode.SUBSELECT)
+    var cbmRates: Set<CbmRate>? = emptySet(),
 ) : BaseEntity()

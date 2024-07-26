@@ -4,13 +4,14 @@ import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.base.service.impl.BaseServiceImpl
 import com.digi.delivery.constant.MessageKey
 import com.digi.delivery.dto.ProvinceDto
+import com.digi.delivery.dto.ProvinceLiteDto
 import com.digi.delivery.entity.Province
 import com.digi.delivery.exception.BusinessException
-import com.digi.delivery.repository.CbmFreightPriceRepository
 import com.digi.delivery.repository.ProvinceRepository
 import com.digi.delivery.repository.RegionFreightPriceRepository
 import com.digi.delivery.repository.RegionRepository
 import com.digi.delivery.service.ProvinceService
+import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -21,10 +22,12 @@ class ProvinceServiceImpl @Autowired constructor(
     val provinceRepository: ProvinceRepository,
     val regionRepository: RegionRepository,
     val regionFreightPriceRepository: RegionFreightPriceRepository,
-    val cbmFreightPriceRepository: CbmFreightPriceRepository,
 ) :
     BaseServiceImpl<ProvinceDto, Province, BaseSearchCriteria<String>, ProvinceRepository, Long>(provinceRepository),
     ProvinceService {
+    override fun findAllProvinceLite(): List<ProvinceLiteDto> = provinceRepository.findAllProvinceLite()
+
+
     override fun update(dto: ProvinceDto): ProvinceDto {
         val dtoId = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
         val provinceEntity = getRepository().findById(dtoId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
@@ -32,25 +35,8 @@ class ProvinceServiceImpl @Autowired constructor(
         updateProvinceFields(provinceEntity, dto)
         updateRegionAssociation(provinceEntity, dto)
         updateRegionFreightPriceAssociation(provinceEntity, dto)
-        updateCbmFreightPriceAssociation(provinceEntity, dto)
 
         return toDTO(provinceRepository.save(provinceEntity))
-    }
-
-    private fun updateCbmFreightPriceAssociation(entity: Province, dto: ProvinceDto) {
-        val newCbmFreightId = dto.cbmFreightPrice?.id
-        val currentCbmFreightId = entity.cbmFreightPrice?.id
-
-        when {
-            newCbmFreightId == null && currentCbmFreightId != null -> entity.cbmFreightPrice = null
-
-            newCbmFreightId != null && newCbmFreightId != currentCbmFreightId -> {
-                val cbmFreightPriceEntity =
-                    cbmFreightPriceRepository.findById(newCbmFreightId)
-                        .orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
-                entity.cbmFreightPrice = cbmFreightPriceEntity
-            }
-        }
     }
 
     private fun updateRegionFreightPriceAssociation(entity: Province, dto: ProvinceDto) {
@@ -100,7 +86,6 @@ class ProvinceServiceImpl @Autowired constructor(
             .apply {
                 region = null
                 regionFreightPrice = null
-                cbmFreightPrice = null
             }
         getRepository().delete(entity)
         return toDTO(entity)
