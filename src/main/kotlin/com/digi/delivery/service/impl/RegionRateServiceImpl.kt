@@ -61,4 +61,11 @@ class RegionRateServiceImpl @Autowired constructor(
         }
     }
 
+    override fun delete(id: Long): RegionRateDto {
+        val entity = onDeleteValidate(id)
+            .apply { regionFreightPrice = null }
+        getRepository().delete(entity)
+        return toDTO(entity)
+    }
+
 }
