@@ -12,12 +12,21 @@ class Commune(
     @Column(name = "name", columnDefinition = "NVARCHAR(255)")
     var name: String? = null,
 
+    @Column(name = "label", columnDefinition = "NVARCHAR(255)")
+    var label: String? = null,
+
+    @Column(name = "km", columnDefinition = "NVARCHAR(255)")
+    var km: String? = null,
+
+    @Column(name = "percent_rate", columnDefinition = "NVARCHAR(255)")
+    var percentRate: String? = null,
+
+    @Column(name = "shipment_type", columnDefinition = "NVARCHAR(255)")
+    var shipmentType: String? = null,
+
     //v
     @ManyToOne
     @JoinColumn(name = "district_id")
     var district: District? = null,
-
-    @Enumerated(EnumType.STRING)
-    var shipmentType: ShipmentType? = ShipmentType.IN_PROVINCE,
 
     ) : BaseEntity()

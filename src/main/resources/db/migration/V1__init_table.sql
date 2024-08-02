@@ -1,4 +1,4 @@
-create table dbo.access_token
+create table access_token
 (
     id            numeric(19) identity
         primary key,
@@ -12,46 +12,9 @@ create table dbo.access_token
     token         varchar(600),
     user_agent    varchar(255)
 )
-go
+    go
 
-create table dbo.cbm_freight_prices
-(
-    id            numeric(19) identity
-        primary key,
-    created_by    nvarchar(255),
-    created_date  datetime,
-    updated_by    nvarchar(255),
-    updated_date  datetime,
-    code          nvarchar(255),
-    delivery_time varchar(255),
-    discount      float,
-    label         nvarchar(255),
-    name          nvarchar(255),
-    proposal      nvarchar(255)
-)
-go
-
-create table dbo.cbm_rates
-(
-    id                   numeric(19) identity
-        primary key,
-    created_by           nvarchar(255),
-    created_date         datetime,
-    updated_by           nvarchar(255),
-    updated_date         datetime,
-    additional_price     numeric(19, 2),
-    additional_volume    float,
-    from_volume          float,
-    note                 varchar(255),
-    price                numeric(19, 2),
-    to_volume            float,
-    cbm_freight_price_id numeric(19)
-        constraint FKpyn702p7oekqcvwurycbnvvob
-            references dbo.cbm_freight_prices
-)
-go
-
-create table dbo.packaging_cbm_prices
+create table packaging_cbm_prices
 (
     id                              numeric(19) identity
         primary key,
@@ -62,14 +25,20 @@ create table dbo.packaging_cbm_prices
     additional_price                numeric(19, 2),
     additional_weight_after_packing float,
     code                            nvarchar(255),
+    from_cbm                        float,
     label                           nvarchar(255),
+    max_cbm                         bit,
     max_weight_per_package          float,
     name                            nvarchar(255),
-    price                           numeric(19, 2)
+    note                            varchar(255),
+    price                           numeric(19, 2),
+    price_coefficient               float,
+    to_cbm                          float,
+    vat                             float
 )
-go
+    go
 
-create table dbo.packaging_prices
+create table packaging_prices
 (
     id           numeric(19) identity
         primary key,
@@ -87,11 +56,14 @@ create table dbo.packaging_prices
     price        numeric(19, 2),
     reuse_price  numeric(19, 2),
     second_price numeric(19, 2),
-    v1_price     numeric(19, 2)
+    size         varchar(255),
+    unit         varchar(255),
+    v1_price     numeric(19, 2),
+    vat          float
 )
-go
+    go
 
-create table dbo.region_freight_prices
+create table region_freight_prices
 (
     id            numeric(19) identity
         primary key,
@@ -106,9 +78,29 @@ create table dbo.region_freight_prices
     name          nvarchar(255),
     proposal      nvarchar(255)
 )
-go
+    go
 
-create table dbo.region_rates
+create table cbm_rates
+(
+    id                      numeric(19) identity
+        primary key,
+    created_by              nvarchar(255),
+    created_date            datetime,
+    updated_by              nvarchar(255),
+    updated_date            datetime,
+    additional_price        numeric(19, 2),
+    additional_volume       float,
+    from_volume             float,
+    note                    varchar(255),
+    price                   numeric(19, 2),
+    to_volume               float,
+    region_freight_price_id numeric(19)
+        constraint FK4xe6nuc0e11rvem00riepklnn
+            references region_freight_prices
+)
+    go
+
+create table region_rates
 (
     id                      numeric(19) identity
         primary key,
@@ -126,11 +118,11 @@ create table dbo.region_rates
     to_kg                   float,
     region_freight_price_id numeric(19)
         constraint FK14ivy9dkjiyl04rbuwb7jlqr7
-            references dbo.region_freight_prices
+            references region_freight_prices
 )
-go
+    go
 
-create table dbo.regions
+create table regions
 (
     id           numeric(19) identity
         primary key,
@@ -141,9 +133,9 @@ create table dbo.regions
     code         nvarchar(255),
     name         nvarchar(255)
 )
-go
+    go
 
-create table dbo.provinces
+create table provinces
 (
     id                      numeric(19) identity
         primary key,
@@ -152,20 +144,20 @@ create table dbo.provinces
     updated_by              nvarchar(255),
     updated_date            datetime,
     code                    nvarchar(255),
-    km                      int,
+    km                      varchar(255),
     license_plate_code      nvarchar(255),
     name                    nvarchar(255),
     route_code              nvarchar(255),
     region_id               numeric(19)
         constraint FKr52p9hvmia0r4042b4s4h6qil
-            references dbo.regions,
+            references regions,
     region_freight_price_id numeric(19)
         constraint FK2xdv34vbk4ffa7n6ucac2f715
-            references dbo.region_freight_prices
+            references region_freight_prices
 )
-go
+    go
 
-create table dbo.districts
+create table districts
 (
     id           numeric(19) identity
         primary key,
@@ -177,11 +169,11 @@ create table dbo.districts
     name         nvarchar(255),
     province_id  numeric(19)
         constraint FK82doq1t64jhly7a546lpvnu2c
-            references dbo.provinces
+            references provinces
 )
-go
+    go
 
-create table dbo.communes
+create table communes
 (
     id            numeric(19) identity
         primary key,
@@ -190,15 +182,18 @@ create table dbo.communes
     updated_by    nvarchar(255),
     updated_date  datetime,
     code          nvarchar(255),
+    km            nvarchar(255),
+    label         nvarchar(255),
     name          nvarchar(255),
-    shipment_type varchar(255),
+    percent_rate  nvarchar(255),
+    shipment_type nvarchar(255),
     district_id   numeric(19)
         constraint FK2icy3sshsnesyj7runy3r5brt
-            references dbo.districts
+            references districts
 )
-go
+    go
 
-create table dbo.roles
+create table roles
 (
     id           numeric(19) identity
         primary key,
@@ -210,9 +205,9 @@ create table dbo.roles
         constraint UK_ofx66keruapi6vyqpv6f2or37
             unique
 )
-go
+    go
 
-create table dbo.user_token
+create table user_token
 (
     id            numeric(19) identity
         primary key,
@@ -223,9 +218,9 @@ create table dbo.user_token
     refresh_token varchar(500),
     user_id       numeric(19)
 )
-go
+    go
 
-create table dbo.users
+create table users
 (
     id            numeric(19) identity
         primary key,
@@ -243,17 +238,17 @@ create table dbo.users
         constraint UK_r43af9ap4edm43mmtq01oddj6
             unique
 )
-go
+    go
 
-create table dbo.user_roles
+create table user_roles
 (
     user_id numeric(19) not null
         constraint FKhfh9dx7w3ubf1co1vdev94g3f
-            references dbo.users,
+            references users,
     role_id numeric(19) not null
         constraint FKh8ciramu9cc9q3qcqiv4ue8a6
-            references dbo.roles,
+            references roles,
     primary key (user_id, role_id)
 )
-go
+    go
 

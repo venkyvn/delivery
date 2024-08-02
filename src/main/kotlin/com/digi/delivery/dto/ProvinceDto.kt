@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 class ProvinceDto : BaseDto() {
     var code: String? = null
     var name: String? = null
-    var km: Int? = 0
+    var km: String? = null
     var licensePlateCode: String? = null
     var routeCode: String? = null
 
@@ -15,5 +15,5 @@ class ProvinceDto : BaseDto() {
     @JsonIgnoreProperties(value = ["province", "communes"])
     var districts: Set<DistrictDto>? = emptySet()
 
-    var regionFreightPrice: RegionFreightPriceDto ?= null
+    var regionFreightPrice: RegionFreightPriceDto? = null
 }

@@ -24,6 +24,7 @@ class CommuneServiceImpl @Autowired constructor(
     override fun findAll(): List<CommuneDto> {
         return toDTOs(communeRepository.findAll())
     }
+
     override fun update(dto: CommuneDto): CommuneDto {
         val dtoId = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
         val communeEntity =
@@ -46,7 +47,10 @@ class CommuneServiceImpl @Autowired constructor(
         districtEntity.apply {
             code = dto.code
             name = dto.name
+            label = dto.label
+            km = dto.km
             shipmentType = dto.shipmentType
+            percentRate = dto.percentRate
         }
     }
 

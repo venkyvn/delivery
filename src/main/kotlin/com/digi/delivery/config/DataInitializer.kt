@@ -3,9 +3,7 @@ package com.digi.delivery.config
 import com.digi.delivery.constant.RoleConstant
 import com.digi.delivery.dto.*
 import com.digi.delivery.entity.Role
-import com.digi.delivery.entity.ShipmentType
 import com.digi.delivery.entity.User
-import com.digi.delivery.excel.ExcelService
 import com.digi.delivery.repository.RoleRepository
 import com.digi.delivery.repository.UserRepository
 import com.digi.delivery.service.*
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
-import java.math.BigDecimal
 
 @Component
 class DataInitializer @Autowired constructor(
@@ -84,7 +81,6 @@ class DataInitializer @Autowired constructor(
                 code = "commune code"
                 name = "commune name"
                 district = DistrictDto().apply { id = eDistrict.id }
-                shipmentType = ShipmentType.IN_PROVINCE
             }
         )
 

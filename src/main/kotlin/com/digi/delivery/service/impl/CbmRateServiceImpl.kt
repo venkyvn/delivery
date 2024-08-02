@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional
 class CbmRateServiceImpl @Autowired constructor(
-    cbmRate: CbmRateRepository,
+    val cbmRate: CbmRateRepository,
     val regionFreightPriceRepository: RegionFreightPriceRepository
 ) :
     BaseServiceImpl<CbmRateDto, CbmRate, BaseSearchCriteria<String>, CbmRateRepository, Long>(cbmRate),

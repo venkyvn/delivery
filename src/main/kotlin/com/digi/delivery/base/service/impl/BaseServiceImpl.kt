@@ -22,7 +22,7 @@ import javax.transaction.Transactional
 @Suppress("UNCHECKED_CAST")
 @Transactional
 open class BaseServiceImpl<D : BaseDto, E : BaseEntity, S : BaseSearchCriteria<*>, R : BaseRepository<E, I>, I : Long>(
-    private val repository: BaseRepository<E, I>,
+    private val repository: R,
 ) : BaseService<D, E, S, R, I> {
 
     private val clazzDto: Class<D>
@@ -153,9 +153,8 @@ open class BaseServiceImpl<D : BaseDto, E : BaseEntity, S : BaseSearchCriteria<*
         return repository.findById(id).orElseThrow { BusinessException(MessageKey.NOT_FOUND, id.toString()) }
     }
 
-    @Suppress("UNCHECKED_CAST")
     protected open fun getRepository(): R {
-        return repository as R
+        return repository
     }
 
 //    protected open fun getPath(): String {

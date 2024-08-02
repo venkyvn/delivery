@@ -15,7 +15,7 @@ class Province : BaseEntity() {
     var name: String? = null
 
     @Column(name = "km")
-    var km: Int? = 0
+    var km: String? = null
 
     @Column(name = "license_plate_code", columnDefinition = "NVARCHAR(255)")
     var licensePlateCode: String? = null

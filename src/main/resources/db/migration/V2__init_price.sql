@@ -8,3 +8,4 @@ values ('A1', 'Vùng 1', '', '', 'D+7', 'admin', 'admin', current_timestamp, cur
        ('A6', 'Vùng 6', '', '', 'D+3', 'admin', 'admin', current_timestamp, current_timestamp),
        ('A7', 'Vùng 7', '', '', 'D+3', 'admin', 'admin', current_timestamp, current_timestamp),
        ('A8', 'Vùng 8', '', '', 'D+4', 'admin', 'admin', current_timestamp, current_timestamp);
+
