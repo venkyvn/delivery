@@ -28,10 +28,10 @@ class Province : BaseEntity() {
     @JoinColumn(name = "region_id")
     var region: Region? = null
 
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "province_id", referencedColumnName = "id")
-    @Fetch(FetchMode.SUBSELECT)
-    var districts: Set<District> = emptySet()
+//    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+//    @JoinColumn(name = "province_id", referencedColumnName = "id")
+//    @Fetch(FetchMode.SUBSELECT)
+//    var districts: Set<District> = emptySet()
 
     //v
     @ManyToOne

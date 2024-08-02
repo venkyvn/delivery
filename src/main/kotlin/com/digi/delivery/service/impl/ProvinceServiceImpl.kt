@@ -27,7 +27,6 @@ class ProvinceServiceImpl @Autowired constructor(
     ProvinceService {
     override fun findAllProvinceLite(): List<ProvinceLiteDto> = provinceRepository.findAllProvinceLite()
 
-
     override fun update(dto: ProvinceDto): ProvinceDto {
         val dtoId = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
         val provinceEntity = getRepository().findById(dtoId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }

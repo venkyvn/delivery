@@ -15,8 +15,8 @@ class Region : BaseEntity() {
     var name: String? = null
 
     //v
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id", referencedColumnName = "id")
-    @Fetch(FetchMode.SUBSELECT)
-    var provinces: Set<Province> = emptySet()
+//    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+//    @JoinColumn(name = "region_id", referencedColumnName = "id")
+//    @Fetch(FetchMode.SUBSELECT)
+//    var provinces: Set<Province> = emptySet()
 }

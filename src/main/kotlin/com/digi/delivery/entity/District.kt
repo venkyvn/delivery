@@ -15,12 +15,12 @@ class District(
     var name: String? = null,
 
     //v
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_id")
     var province: Province? = null,
 
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "district_id", referencedColumnName = "id")
-    @Fetch(FetchMode.SUBSELECT)
-    var communes: Set<Commune> = emptySet(),
+//    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+//    @JoinColumn(name = "district_id", referencedColumnName = "id")
+//    @Fetch(FetchMode.SUBSELECT)
+//    var communes: Set<Commune> = emptySet(),
 ) : BaseEntity()

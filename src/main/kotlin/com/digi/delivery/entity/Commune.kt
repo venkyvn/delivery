@@ -25,7 +25,7 @@ class Commune(
     var shipmentType: String? = null,
 
     //v
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "district_id")
     var district: District? = null,
 

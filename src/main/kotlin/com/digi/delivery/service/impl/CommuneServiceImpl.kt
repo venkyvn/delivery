@@ -36,6 +36,7 @@ class CommuneServiceImpl @Autowired constructor(
         return toDTO(getRepository().save(communeEntity))
     }
 
+    //able to remove this one
     override fun delete(id: Long): CommuneDto {
         val entity = onDeleteValidate(id)
             .apply { district = null }
