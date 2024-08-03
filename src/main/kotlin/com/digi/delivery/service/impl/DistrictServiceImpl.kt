@@ -3,7 +3,9 @@ package com.digi.delivery.service.impl
 import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.base.service.impl.BaseServiceImpl
 import com.digi.delivery.constant.MessageKey
+import com.digi.delivery.dto.CommuneLiteDto
 import com.digi.delivery.dto.DistrictDto
+import com.digi.delivery.dto.DistrictLiteDto
 import com.digi.delivery.entity.District
 import com.digi.delivery.exception.BusinessException
 import com.digi.delivery.repository.DistrictRepository
@@ -21,6 +23,8 @@ class DistrictServiceImpl @Autowired constructor(
 ) :
     BaseServiceImpl<DistrictDto, District, BaseSearchCriteria<String>, DistrictRepository, Long>(districtRepository),
     DistrictService {
+
+    override fun getAllDistrictLite(): List<DistrictLiteDto> = this.getRepository().findAllDistrictLite()
 
     override fun update(dto: DistrictDto): DistrictDto {
         val dtoId = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
