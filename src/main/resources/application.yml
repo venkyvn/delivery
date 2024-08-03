@@ -1,5 +1,11 @@
 server:
   port: ${SERVER_PORT:8080}
+  ssl:
+    key-store: classpath:certs/keystore.p12
+    key-store-password: ${PRIVATE_KEY_PASSWORD:123456}
+    key-store-type: PKCS12
+    key-alias: alias
+
 
 spring:
   datasource:
@@ -16,11 +22,21 @@ spring:
         dialect: org.hibernate.dialect.SQLServerDialect
         format_sql: true
   #    database-platform: org.hibernate.dialect.SQLServerDialect
-
   flyway:
     enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
+#  ssl:
+#    bundle:
+#      pem:
+#        server:
+#          keystore:
+#            certificate: classpath:certs/server.crt
+#            private-key: classpath:certs/server.key
+#            private-key-password: ${PRIVATE_KEY_PASSWORD:123456}
+#          reload-on-update: true
+#          truststore:
+#            certificate: client/certs/client.crt
 
 apiBasePath: /api/v1
 
