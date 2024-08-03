@@ -4,7 +4,6 @@ import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.base.service.impl.BaseServiceImpl
 import com.digi.delivery.constant.MessageKey
 import com.digi.delivery.dto.CommuneDto
-import com.digi.delivery.dto.CommuneLiteDto
 import com.digi.delivery.entity.Commune
 import com.digi.delivery.exception.BusinessException
 import com.digi.delivery.repository.CommuneRepository
@@ -22,11 +21,18 @@ class CommuneServiceImpl @Autowired constructor(
 ) :
     BaseServiceImpl<CommuneDto, Commune, BaseSearchCriteria<String>, CommuneRepository, Long>(communeRepository),
     CommuneService {
-
-    override fun getAllCommuneLite(): List<CommuneLiteDto> = this.getRepository().findAllCommuneLite()
-
     override fun findAll(): List<CommuneDto> {
-        return toDTOs(communeRepository.findAll())
+        return this.getRepository().findAllCommuneLite().stream().map { lite ->
+            CommuneDto().apply {
+                id = lite.id
+                code = lite.code
+                name = lite.name
+                label = lite.label
+                km = lite.km
+                shipmentType = lite.shipmentType
+                percentRate = lite.percentRate
+            }
+        }.toList()
     }
 
     override fun update(dto: CommuneDto): CommuneDto {

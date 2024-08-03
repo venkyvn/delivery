@@ -19,10 +19,5 @@ class DistrictController @Autowired constructor(
     val districtService: DistrictService,
 ) : BaseController<DistrictDto, District, BaseSearchCriteria<String>, DistrictService, DistrictRepository, Long>(
     districtService
-) {
-    @GetMapping("/lite")
-    fun getCommuneLite(): ResponseEntity<ResponseDto> {
-        return ResponseDto.ok(districtService.getAllDistrictLite())
-    }
+)
 
-}

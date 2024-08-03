@@ -11,7 +11,6 @@ import com.digi.delivery.repository.ProvinceRepository
 import com.digi.delivery.repository.RegionFreightPriceRepository
 import com.digi.delivery.repository.RegionRepository
 import com.digi.delivery.service.ProvinceService
-import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -26,6 +25,18 @@ class ProvinceServiceImpl @Autowired constructor(
     BaseServiceImpl<ProvinceDto, Province, BaseSearchCriteria<String>, ProvinceRepository, Long>(provinceRepository),
     ProvinceService {
     override fun findAllProvinceLite(): List<ProvinceLiteDto> = provinceRepository.findAllProvinceLite()
+    override fun findAll(): List<ProvinceDto> {
+        return this.getRepository().findAllProvinceLite().stream().map { lite ->
+            ProvinceDto().apply {
+                id = lite.id
+                code = lite.code
+                name = lite.name
+                km = lite.km
+                licensePlateCode = lite.licensePlateCode
+                routeCode = lite.routeCode
+            }
+        }.toList()
+    }
 
     override fun update(dto: ProvinceDto): ProvinceDto {
         val dtoId = dto.id ?: throw BusinessException(MessageKey.BAD_REQUEST)
