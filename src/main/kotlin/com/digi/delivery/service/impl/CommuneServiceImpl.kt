@@ -4,6 +4,8 @@ import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.base.service.impl.BaseServiceImpl
 import com.digi.delivery.constant.MessageKey
 import com.digi.delivery.dto.CommuneDto
+import com.digi.delivery.dto.CommuneLiteDto
+import com.digi.delivery.dto.DistrictLiteDto
 import com.digi.delivery.dto.search.CommuneSearch
 import com.digi.delivery.entity.Commune
 import com.digi.delivery.exception.BusinessException
@@ -51,11 +53,14 @@ class CommuneServiceImpl @Autowired constructor(
             if (!StringUtils.isBlank(communeSearch.label)) {
                 spec = spec.and(CommuneSpec.hasShipmentType(communeSearch.label!!))
             }
-
         }
 
         val page = this.getRepository().findAll(spec, pageable)
         return PageImpl(toDTOs(page.content), pageable, page.totalElements)
+    }
+
+    override fun findDistrictByProvinceId(provinceId: Long): List<CommuneLiteDto> {
+        return this.getRepository().findAllCommuneLiteByDistrictId(provinceId)
     }
 
     override fun findAll(): List<CommuneDto> {

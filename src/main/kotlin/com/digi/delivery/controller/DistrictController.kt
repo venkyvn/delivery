@@ -20,5 +20,11 @@ class DistrictController @Autowired constructor(
     val districtService: DistrictService,
 ) : BaseController<DistrictDto, District, BaseSearchCriteria<BaseSearch>, DistrictService, DistrictRepository, Long>(
     districtService
-)
+) {
+    @GetMapping("/province/{provinceId}")
+    fun findByProvinceId(@PathVariable provinceId: Long): ResponseEntity<ResponseDto> {
+        return ResponseDto.ok(districtService.findDistrictByProvinceId(provinceId))
+    }
+
+}
 

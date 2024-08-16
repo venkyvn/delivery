@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository
 interface CommuneRepository : BaseRepository<Commune, Long> {
     @Query("SELECT new com.digi.delivery.dto.CommuneLiteDto(s.id, s.code, s.name, s.label, s.km, s.shipmentType, s.percentRate) FROM Commune s")
     fun findAllCommuneLite(): List<CommuneLiteDto>
+
+    @Query("SELECT new com.digi.delivery.dto.CommuneLiteDto(s.id, s.code, s.name, s.label, s.km, s.shipmentType, s.percentRate) FROM Commune s where s.district.id = ?1")
+    fun findAllCommuneLiteByDistrictId(districtId: Long): List<CommuneLiteDto>
 }

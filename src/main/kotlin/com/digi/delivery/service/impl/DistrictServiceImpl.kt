@@ -4,6 +4,7 @@ import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.base.service.impl.BaseServiceImpl
 import com.digi.delivery.constant.MessageKey
 import com.digi.delivery.dto.DistrictDto
+import com.digi.delivery.dto.DistrictLiteDto
 import com.digi.delivery.dto.search.BaseSearch
 import com.digi.delivery.entity.District
 import com.digi.delivery.exception.BusinessException
@@ -47,6 +48,10 @@ class DistrictServiceImpl @Autowired constructor(
 
         val page = this.getRepository().findAll(spec, pageable)
         return PageImpl(toDTOs(page.content), pageable, page.totalElements)
+    }
+
+    override fun findDistrictByProvinceId(provinceId: Long): List<DistrictLiteDto> {
+        return this.getRepository().findAllDistrictLiteByProvinceId(provinceId)
     }
 
     override fun findAll(): List<DistrictDto> {
