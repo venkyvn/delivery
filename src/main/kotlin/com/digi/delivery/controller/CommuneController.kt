@@ -3,6 +3,7 @@ package com.digi.delivery.controller
 import com.digi.delivery.base.controller.BaseController
 import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.dto.CommuneDto
+import com.digi.delivery.dto.search.CommuneSearch
 import com.digi.delivery.entity.Commune
 import com.digi.delivery.repository.CommuneRepository
 import com.digi.delivery.service.CommuneService
@@ -15,6 +16,6 @@ import org.springframework.web.bind.annotation.*
 @Api(tags = ["Commune"], description = "Commune")
 class CommuneController @Autowired constructor(
     val communeService: CommuneService,
-) : BaseController<CommuneDto, Commune, BaseSearchCriteria<String>, CommuneService, CommuneRepository, Long>(
+) : BaseController<CommuneDto, Commune, BaseSearchCriteria<CommuneSearch>, CommuneService, CommuneRepository, Long>(
     communeService
 )

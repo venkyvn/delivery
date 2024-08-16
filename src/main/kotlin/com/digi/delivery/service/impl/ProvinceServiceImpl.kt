@@ -5,13 +5,21 @@ import com.digi.delivery.base.service.impl.BaseServiceImpl
 import com.digi.delivery.constant.MessageKey
 import com.digi.delivery.dto.ProvinceDto
 import com.digi.delivery.dto.ProvinceLiteDto
+import com.digi.delivery.dto.search.BaseSearch
 import com.digi.delivery.entity.Province
 import com.digi.delivery.exception.BusinessException
 import com.digi.delivery.repository.ProvinceRepository
 import com.digi.delivery.repository.RegionFreightPriceRepository
 import com.digi.delivery.repository.RegionRepository
+import com.digi.delivery.repository.spec.BaseSpec
 import com.digi.delivery.service.ProvinceService
+import com.digi.delivery.util.SearchHelper
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.apache.commons.lang3.StringUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.jpa.domain.Specification
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -22,8 +30,9 @@ class ProvinceServiceImpl @Autowired constructor(
     val regionRepository: RegionRepository,
     val regionFreightPriceRepository: RegionFreightPriceRepository,
 ) :
-    BaseServiceImpl<ProvinceDto, Province, BaseSearchCriteria<String>, ProvinceRepository, Long>(provinceRepository),
+    BaseServiceImpl<ProvinceDto, Province, BaseSearchCriteria<BaseSearch>, ProvinceRepository, Long>(provinceRepository),
     ProvinceService {
+
     override fun findAllProvinceLite(): List<ProvinceLiteDto> = provinceRepository.findAllProvinceLite()
     override fun findAll(): List<ProvinceDto> {
         return this.getRepository().findAllProvinceLite().stream().map { lite ->
@@ -36,6 +45,26 @@ class ProvinceServiceImpl @Autowired constructor(
                 routeCode = lite.routeCode
             }
         }.toList()
+    }
+
+    override fun search(searchFilter: BaseSearchCriteria<BaseSearch>): Page<ProvinceDto> {
+        logger.info("search {}", searchFilter)
+        val pageable = SearchHelper.getPageableObj(searchFilter)
+        var spec: Specification<Province> = Specification.where(null)
+        val objectMapper = ObjectMapper()
+        val baseSearch = objectMapper.convertValue(searchFilter.searchCriteria, BaseSearch::class.java)
+
+        baseSearch?.let {
+            if (!StringUtils.isBlank(baseSearch.code)) {
+                spec = spec.and(BaseSpec<Province>().hasCode(baseSearch.code!!))
+            }
+            if (!StringUtils.isBlank(baseSearch.name)) {
+                spec = spec.and(BaseSpec<Province>().hasName(baseSearch.name!!))
+            }
+        }
+
+        val page = this.getRepository().findAll(spec, pageable)
+        return PageImpl(toDTOs(page.content), pageable, page.totalElements)
     }
 
     override fun update(dto: ProvinceDto): ProvinceDto {

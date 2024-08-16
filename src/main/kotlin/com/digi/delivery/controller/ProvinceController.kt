@@ -4,6 +4,7 @@ import com.digi.delivery.base.controller.BaseController
 import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.dto.ProvinceDto
 import com.digi.delivery.dto.ResponseDto
+import com.digi.delivery.dto.search.BaseSearch
 import com.digi.delivery.entity.Province
 import com.digi.delivery.repository.ProvinceRepository
 import com.digi.delivery.service.ProvinceService
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*
 @Api(tags = ["Province"], description = "Province")
 class ProvinceController @Autowired constructor(
     val provinceService: ProvinceService,
-) : BaseController<ProvinceDto, Province, BaseSearchCriteria<String>, ProvinceService, ProvinceRepository, Long>(
+) : BaseController<ProvinceDto, Province, BaseSearchCriteria<BaseSearch>, ProvinceService, ProvinceRepository, Long>(
     provinceService
 ) {
     @GetMapping("/lite")

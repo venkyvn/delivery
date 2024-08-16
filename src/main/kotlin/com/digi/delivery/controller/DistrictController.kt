@@ -4,6 +4,7 @@ import com.digi.delivery.base.controller.BaseController
 import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.dto.DistrictDto
 import com.digi.delivery.dto.ResponseDto
+import com.digi.delivery.dto.search.BaseSearch
 import com.digi.delivery.entity.District
 import com.digi.delivery.repository.DistrictRepository
 import com.digi.delivery.service.DistrictService
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*
 @Api(tags = ["District"], description = "District")
 class DistrictController @Autowired constructor(
     val districtService: DistrictService,
-) : BaseController<DistrictDto, District, BaseSearchCriteria<String>, DistrictService, DistrictRepository, Long>(
+) : BaseController<DistrictDto, District, BaseSearchCriteria<BaseSearch>, DistrictService, DistrictRepository, Long>(
     districtService
 )
 

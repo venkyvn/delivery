@@ -20,6 +20,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServerDialect
+        legacy_limit_handler: true
         format_sql: true
   #    database-platform: org.hibernate.dialect.SQLServerDialect
   flyway:
