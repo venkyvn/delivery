@@ -116,7 +116,10 @@ class CommuneServiceImpl @Autowired constructor(
 
             newDistrictId != null && newDistrictId != currentDistrictId -> {
                 entity.district =
-                    districtRepository.findById(newDistrictId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+                    districtRepository.findById(newDistrictId).orElseThrow {
+                        logger.error("District with ID $newDistrictId not found. Throwing BusinessException.")
+                        BusinessException(MessageKey.BAD_REQUEST)
+                    }
             }
         }
     }

@@ -61,7 +61,10 @@ class CbmRateServiceImpl @Autowired constructor(
             newCbmFreightPriceId != null && newCbmFreightPriceId != currentCbmFreightPriceId -> {
                 entity.regionFreightPrice =
                     regionFreightPriceRepository.findById(newCbmFreightPriceId)
-                        .orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+                        .orElseThrow {
+                            logger.error("CbmFreightPrice with ID $newCbmFreightPriceId not found. Throwing BusinessException.")
+                            BusinessException(MessageKey.BAD_REQUEST)
+                        }
             }
         }
     }

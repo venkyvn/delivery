@@ -1,0 +1,136 @@
+###
+GET https://localhost:8080/api/v1/receipt/2
+
+###
+POST https://localhost:8080/api/v1/receipt
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIyNjAxNTE1fQ.ePTk0YQH9wh2P0OJs9qLuvnqHB0MylUsz4PPLU55CqNPoejNWXLLVzRjVwZVBa6f_W0M_FUzlYLnTvwNIZ0iYg
+Content-Type: application/json
+
+{
+  "senderName": "senderName",
+  "senderIdCard": "senderIdCard",
+  "senderPhone": "senderPhone",
+  "senderAddress": "senderAddress",
+  "receiverName": "receiverName",
+  "receiverIdCard": "receiverIdCard",
+  "receiverPhone": "receiverPhone",
+  "receiverProvince": {
+    "id": 1
+  },
+  "receiverDistrict": {
+    "id": 1
+  },
+  "receiverCommune": {
+    "id": 1
+  },
+  "receiverAddress": "receiverAddress",
+  "itemName": "itemName",
+  "itemValue": "0",
+  "itemLength": "1",
+  "itemWidth": "2",
+  "itemHeight": "3",
+  "itemWeight": "4",
+  "itemFragile": true,
+  "itemQuantity": 1,
+  "serviceFee": "123.3",
+  "packagingService": "packagingService",
+  "packagingServiceFee": "133.3",
+  "packagingServiceQuantity": 1,
+  "totalAmount": "50"
+}
+
+###
+# curl --location --request PUT 'https://localhost:8080/api/v1/receipt'
+#--header 'Content-Type: application/json'
+#--header 'Accept: */*'
+#--header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIyNjAxNTE1fQ.ePTk0YQH9wh2P0OJs9qLuvnqHB0MylUsz4PPLU55CqNPoejNWXLLVzRjVwZVBa6f_W0M_FUzlYLnTvwNIZ0iYg'
+#--data '{
+#        "id": 1,
+#        "senderName": "updated",
+#        "senderIdCard": "senderIdCard",
+#        "senderPhone": "senderPhone",
+#        "senderAddress": "senderAddress",
+#        "receiverName": "receiverName",
+#        "receiverIdCard": "receiverIdCard",
+#        "receiverPhone": "receiverPhone",
+#        "receiverProvince": {
+#            "id": 2,
+#            "code": "",
+#            "name": "An Giang 2",
+#            "km": null,
+#            "licensePlateCode": null,
+#            "routeCode": null,
+#            "regionFreightPrice": null
+#        },
+#        "receiverDistrict": {
+#            "id": 2,
+#            "code": "",
+#            "name": "An Phú"
+#        },
+#        "receiverCommune": {
+#            "id": 2,
+#            "code": "",
+#            "name": "An Phú",
+#            "label": "An GiangAn Phú",
+#            "km": "25",
+#            "shipmentType": "Nội Tuyến",
+#            "percentRate": "100"
+#        },
+#        "receiverAddress": "receiverAddress",
+#        "itemName": "itemName",
+#        "itemValue": 0.00,
+#        "itemLength": 1.00,
+#        "itemWidth": 2.00,
+#        "itemHeight": 3.00,
+#        "itemWeight": 4.00,
+#        "itemFragile": true,
+#        "itemQuantity": 1,
+#        "serviceFee": 123.30,
+#        "packagingService": "packagingService",
+#        "packagingServiceFee": 133.30,
+#        "packagingServiceQuantity": 1,
+#        "totalAmount": 50.00
+#    }'
+PUT https://localhost:8080/api/v1/receipt
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIyNjAxNTE1fQ.ePTk0YQH9wh2P0OJs9qLuvnqHB0MylUsz4PPLU55CqNPoejNWXLLVzRjVwZVBa6f_W0M_FUzlYLnTvwNIZ0iYg
+Content-Type: application/json
+
+{
+  "id": 1,
+  "senderName": "updated 2",
+  "senderIdCard": "senderIdCard 3",
+  "senderPhone": "senderPhone",
+  "senderAddress": "senderAddress",
+  "receiverName": "receiverName",
+  "receiverIdCard": "receiverIdCard",
+  "receiverPhone": "receiverPhone",
+  "receiverProvince": {
+    "id": 6
+  },
+  "receiverDistrict": {
+    "id": 6
+  },
+  "receiverCommune": {
+    "id": 6
+  },
+  "receiverAddress": "receiverAddress",
+  "itemName": "itemName",
+  "itemValue": 0.00,
+  "itemLength": 1.00,
+  "itemWidth": 2.00,
+  "itemHeight": 3.00,
+  "itemWeight": 4.00,
+  "itemFragile": true,
+  "itemQuantity": 1,
+  "serviceFee": 123.30,
+  "packagingService": "packagingService",
+  "packagingServiceFee": 133.30,
+  "packagingServiceQuantity": 1,
+  "totalAmount": 50.00
+}
+
+###
+DELETE https://localhost:8080/api/v1/receipt/1
+

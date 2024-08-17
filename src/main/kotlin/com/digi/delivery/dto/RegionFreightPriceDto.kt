@@ -11,9 +11,9 @@ class RegionFreightPriceDto() : BaseDto() {
     var deliveryTime: String? = null
     var discount: Float? = null
 
-    @JsonIgnoreProperties("regionFreightPrice", "regionFreightPrice")
+    @JsonIgnoreProperties("regionFreightPrice")
     var regionRates: Set<RegionRateDto>? = emptySet()
 
-    @JsonIgnoreProperties("regionFreightPrice", "regionFreightPrice")
+    @JsonIgnoreProperties("regionFreightPrice")
     var cbmRates: Set<CbmRateDto>? = emptySet()
 }

@@ -98,7 +98,10 @@ class DistrictServiceImpl @Autowired constructor(
 
             newProvinceId != null && newProvinceId != currentProvinceId -> {
                 entity.province =
-                    provinceRepository.findById(newProvinceId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+                    provinceRepository.findById(newProvinceId).orElseThrow {
+                        logger.error("Province with ID $newProvinceId not found. Throwing BusinessException.")
+                        BusinessException(MessageKey.BAD_REQUEST)
+                    }
             }
         }
     }

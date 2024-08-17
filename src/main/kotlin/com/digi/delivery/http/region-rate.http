@@ -1,0 +1,22 @@
+GET https://localhost:8080/api/v1/region-rate/1
+
+###
+POST https://localhost:8080/api/v1/region-rate
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIyNjAxNTE1fQ.ePTk0YQH9wh2P0OJs9qLuvnqHB0MylUsz4PPLU55CqNPoejNWXLLVzRjVwZVBa6f_W0M_FUzlYLnTvwNIZ0iYg
+Content-Type: application/json
+
+{
+  "fromKg": "5",
+  "toKg": "10",
+  "price": "400000",
+  "additionalPrice": "3000",
+  "additionalWeight": null,
+  "note": "5 toi 10 kg",
+  "regionFreightPrice": {
+    "id": 2
+  }
+}
+
+###
+

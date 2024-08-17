@@ -88,7 +88,9 @@ class ProvinceServiceImpl @Autowired constructor(
             newRegionFreightId != null && newRegionFreightId != currentRegionFreightId -> {
                 val regionFreightPriceEntity =
                     regionFreightPriceRepository.findById(newRegionFreightId)
-                        .orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+                        .orElseThrow {
+                            logger.error("RegionFreightPrice with ID $newRegionFreightId not found. Throwing BusinessException.")
+                            BusinessException(MessageKey.BAD_REQUEST) }
                 entity.regionFreightPrice = regionFreightPriceEntity
             }
         }
@@ -113,7 +115,10 @@ class ProvinceServiceImpl @Autowired constructor(
 
             newRegionId != null && newRegionId != currentRegionId -> {
                 val regionEntity =
-                    regionRepository.findById(newRegionId).orElseThrow { BusinessException(MessageKey.BAD_REQUEST) }
+                    regionRepository.findById(newRegionId).orElseThrow {
+                        logger.error("Region with ID $newRegionId not found. Throwing BusinessException.")
+                        BusinessException(MessageKey.BAD_REQUEST)
+                    }
                 entity.region = regionEntity
 
             }

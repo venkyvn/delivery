@@ -8,8 +8,6 @@ plugins {
     kotlin("plugin.spring") version "1.9.24"
     kotlin("plugin.jpa") version "1.9.24"
     kotlin("plugin.allopen") version "1.9.24"
-    kotlin("kapt") version "1.5.20"
-
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -33,7 +31,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    kapt("org.hibernate:hibernate-jpamodelgen:5.4.12.Final")
 
 
     implementation("com.microsoft.sqlserver:mssql-jdbc:11.2.3.jre17")

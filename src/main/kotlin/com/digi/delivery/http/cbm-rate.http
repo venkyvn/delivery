@@ -1,0 +1,21 @@
+GET https://localhost:8080/api/v1/cbm-rate/1
+
+###
+POST https://localhost:8080/api/v1/cbm-rate
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIyNjAxNTE1fQ.ePTk0YQH9wh2P0OJs9qLuvnqHB0MylUsz4PPLU55CqNPoejNWXLLVzRjVwZVBa6f_W0M_FUzlYLnTvwNIZ0iYg
+Content-Type: application/json
+
+{
+  "id": 1,
+  "fromVolume": "0",
+  "toVolume": "5",
+  "price": "40000",
+  "additionalPrice": "0",
+  "regionFreightPrice": {
+    "id": 2
+  }
+}
+
+###
+
