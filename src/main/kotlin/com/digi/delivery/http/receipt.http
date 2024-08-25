@@ -1,5 +1,27 @@
+POST https://localhost:8080/api/v1/receipt/search
+Content-Type: application/json
+
+{
+  "searchCriteria": {
+    "orderNumber": "",
+    "receiptCode":"",
+    "senderName": "vuong",
+    "senderIdCard":"",
+    "senderPhone": "",
+    "receiverName":"",
+    "receiverIdCard": "",
+    "receiverPhone":""
+  },
+  "page": 1,
+  "pageSize": 5,
+  "direction": "",
+  "sortBy": ""
+}
 ###
-GET https://localhost:8080/api/v1/receipt/2
+GET https://localhost:8080/api/v1/receipt/8
+
+###
+DELETE https://localhost:8080/api/v1/receipt/7
 
 ###
 POST https://localhost:8080/api/v1/receipt
@@ -8,6 +30,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX
 Content-Type: application/json
 
 {
+  "orderNumber": "{{$uuid}}",
+  "receiptCode": "{{$uuid}}",
   "senderName": "senderName",
   "senderIdCard": "senderIdCard",
   "senderPhone": "senderPhone",
@@ -16,13 +40,13 @@ Content-Type: application/json
   "receiverIdCard": "receiverIdCard",
   "receiverPhone": "receiverPhone",
   "receiverProvince": {
-    "id": 1
+    "id": 8
   },
   "receiverDistrict": {
-    "id": 1
+    "id": 8
   },
   "receiverCommune": {
-    "id": 1
+    "id": 8
   },
   "receiverAddress": "receiverAddress",
   "itemName": "itemName",
@@ -34,7 +58,95 @@ Content-Type: application/json
   "itemFragile": true,
   "itemQuantity": 1,
   "serviceFee": "123.3",
-  "packagingService": "packagingService",
+  "packagingServices": [
+    {
+      "quantity": 1,
+      "isReused": false,
+      "packagingPrice": {
+        "id": 1,
+        "code": "code",
+        "name":"name",
+        "label": "label",
+        "size":"size"
+      }
+    },
+    {
+      "quantity": 2,
+      "isReused": false,
+      "packagingPrice": {
+        "id": 2,
+        "code": "code",
+        "name":"name",
+        "label": "label",
+        "size":"size"
+      }
+    }
+  ],
+  "packagingServiceFee": "133.3",
+  "packagingServiceQuantity": 1,
+  "totalAmount": "50"
+}
+
+###
+PUT https://localhost:8080/api/v1/receipt
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIyNjAxNTE1fQ.ePTk0YQH9wh2P0OJs9qLuvnqHB0MylUsz4PPLU55CqNPoejNWXLLVzRjVwZVBa6f_W0M_FUzlYLnTvwNIZ0iYg
+Content-Type: application/json
+
+{
+  "id": 1,
+  "orderNumber": "{{$uuid}}",
+  "receiptCode": "{{$uuid}}",
+  "senderName": "vuong",
+  "senderIdCard": "senderIdCard updated",
+  "senderPhone": "senderPhone updated",
+  "senderAddress": "senderAddress updated",
+  "receiverName": "test",
+  "receiverIdCard": "receiverIdCard updated",
+  "receiverPhone": "receiverPhone updated",
+  "receiverProvince": {
+    "id": 9
+  },
+  "receiverDistrict": {
+    "id": 9
+  },
+  "receiverCommune": {
+    "id": 9
+  },
+  "receiverAddress": "receiverAddress",
+  "itemName": "itemName",
+  "itemValue": "0",
+  "itemLength": "1",
+  "itemWidth": "2",
+  "itemHeight": "3",
+  "itemWeight": "4",
+  "itemFragile": true,
+  "itemQuantity": 1,
+  "serviceFee": "123.3",
+  "packagingServices": [
+    {
+      "quantity": 7,
+      "isReused": false,
+      "packagingPrice": {
+        "id": 1,
+        "code": "code",
+        "name":"name",
+        "label": "label",
+        "size":"size"
+      }
+    },
+    {
+      "quantity": 7,
+      "isReused": false,
+      "packagingPrice": {
+        "id": 2,
+        "code": "code",
+        "name":"name",
+        "label": "label",
+        "size":"size"
+      }
+    }
+  ],
   "packagingServiceFee": "133.3",
   "packagingServiceQuantity": 1,
   "totalAmount": "50"

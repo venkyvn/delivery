@@ -1,12 +1,22 @@
 package com.digi.delivery.entity
 
 import com.digi.delivery.base.entity.BaseEntity
+import com.digi.delivery.dto.PackagingPriceDto
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import java.math.BigDecimal
 import javax.persistence.*
+
 
 @Entity
 @Table(name = "receipt")
 class Receipt : BaseEntity() {
+    @Column(name = "order_number", columnDefinition = "NVARCHAR(255)")
+    var orderNumber: String? = null
+
+    @Column(name = "receipt_code", columnDefinition = "NVARCHAR(255)")
+    var receiptCode: String? = null
+
     @Column(name = "sender_name", columnDefinition = "NVARCHAR(255)")
     var senderName: String? = null
 
@@ -70,8 +80,6 @@ class Receipt : BaseEntity() {
     @Column(name = "service_fee")
     var serviceFee: BigDecimal = BigDecimal.ZERO
 
-    @Column(name = "packaging_service", columnDefinition = "NVARCHAR(255)")
-    var packagingService: String? = null
 
     @Column(name = "packaging_service_fee")
     var packagingServiceFee: BigDecimal = BigDecimal.ZERO
@@ -81,4 +89,27 @@ class Receipt : BaseEntity() {
 
     @Column(name = "total_amount")
     var totalAmount: BigDecimal = BigDecimal.ZERO
+
+    @Column(name = "packaging_service_json", columnDefinition = "nvarchar")
+    var packagingServiceJson: String = ""
+
+    @Transient
+    private val objectMapper = ObjectMapper()
+
+    @set:Transient
+    @get:Transient
+    var packagingServices: List<PackagingServiceDto>
+        get() = objectMapper.readValue(packagingServiceJson)
+        set(value) {
+            packagingServiceJson = objectMapper.writeValueAsString(value)
+        }
+}
+class PackagingServiceList {
+    var packagingService: List<PackagingServiceDto>? = emptyList()
+}
+
+class PackagingServiceDto {
+    var quantity: Int? = 0
+    var isReused: Boolean? = false
+    var packagingPrice: PackagingPriceDto? = null
 }

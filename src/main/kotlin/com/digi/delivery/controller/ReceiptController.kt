@@ -3,6 +3,7 @@ package com.digi.delivery.controller
 import com.digi.delivery.base.controller.BaseController
 import com.digi.delivery.base.repository.BaseSearchCriteria
 import com.digi.delivery.dto.ReceiptDto
+import com.digi.delivery.dto.search.ReceiptSearch
 import com.digi.delivery.entity.Receipt
 import com.digi.delivery.repository.ReceiptRepository
 import com.digi.delivery.service.ReceiptService
@@ -15,6 +16,6 @@ import org.springframework.web.bind.annotation.*
 @Api(tags = ["Receipt"], description = "Receipt")
 class ReceiptController @Autowired constructor(
     receiptService: ReceiptService,
-) : BaseController<ReceiptDto, Receipt, BaseSearchCriteria<String>, ReceiptService, ReceiptRepository, Long>(
+) : BaseController<ReceiptDto, Receipt, BaseSearchCriteria<ReceiptSearch>, ReceiptService, ReceiptRepository, Long>(
     receiptService
 )

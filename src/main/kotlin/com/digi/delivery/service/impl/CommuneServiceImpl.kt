@@ -51,7 +51,7 @@ class CommuneServiceImpl @Autowired constructor(
                 spec = spec.and(CommuneSpec.hasShipmentType(communeSearch.shipmentType!!))
             }
             if (!StringUtils.isBlank(communeSearch.label)) {
-                spec = spec.and(CommuneSpec.hasShipmentType(communeSearch.label!!))
+                spec = spec.and(CommuneSpec.hasLabel(communeSearch.label!!))
             }
         }
 

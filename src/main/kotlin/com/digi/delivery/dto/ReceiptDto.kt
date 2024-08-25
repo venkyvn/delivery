@@ -1,9 +1,15 @@
 package com.digi.delivery.dto
 
+import com.digi.delivery.entity.PackagingServiceDto
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.math.BigDecimal
+import java.util.*
 
 class ReceiptDto : BaseDto() {
+    var orderNumber: String? = null
+
+    var receiptCode: String? = null
+
     var senderName: String? = null
 
     var senderIdCard: String? = null
@@ -47,11 +53,13 @@ class ReceiptDto : BaseDto() {
 
     var serviceFee: BigDecimal = BigDecimal.ZERO
 
-    var packagingService: String? = null
+    var packagingServices: List<PackagingServiceDto>? = emptyList()
 
     var packagingServiceFee: BigDecimal = BigDecimal.ZERO
 
     var packagingServiceQuantity: Int = 1
 
     var totalAmount: BigDecimal = BigDecimal.ZERO
+
+    var createdDate: Date? = null
 }
