@@ -7,10 +7,10 @@ import javax.persistence.*
 @Entity
 @Table(name = "region_rates")
 class RegionRate(
-    @Column(name = "name")
+    @Column(name = "name", columnDefinition = "NVARCHAR(255)")
     var name: String? = null,
 
-    @Column(name = "label")
+    @Column(name = "label", columnDefinition = "NVARCHAR(255)")
     var label: String? = null,
 
     @Column(name = "from_kg")
@@ -28,7 +28,7 @@ class RegionRate(
     @Column(name = "additional_weight")
     var additionalWeight: BigDecimal? = BigDecimal.ZERO,
 
-    @Column(name = "note")
+    @Column(name = "note", columnDefinition = "NVARCHAR(255)")
     var note: String? = null,
 
     //v

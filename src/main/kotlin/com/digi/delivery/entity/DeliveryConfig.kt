@@ -8,6 +8,12 @@ import javax.persistence.Table
 @Entity
 @Table(name = "delivery_config")
 class DeliveryConfig : BaseEntity() {
-    @Column(name = "tax", columnDefinition = "NVARCHAR(255)")
-    var tax: String? = null
+    @Column(name = "code", columnDefinition = "NVARCHAR(255)")
+    var code: String? = null
+    @Column(name = "name", columnDefinition = "NVARCHAR(255)")
+    var name: String? = null
+    @Column(name = "note", columnDefinition = "NVARCHAR(255)")
+    var note: String? = null
+    @Column(name = "percentage", columnDefinition = "NVARCHAR(255)")
+    var percentage: String? = null
 }

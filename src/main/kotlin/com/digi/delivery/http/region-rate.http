@@ -1,4 +1,5 @@
-GET https://localhost:8080/api/v1/region-rate/1
+GET https://localhost:8080/api/v1/region-rate/6
+
 
 ###
 POST https://localhost:8080/api/v1/region-rate
@@ -7,6 +8,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX
 Content-Type: application/json
 
 {
+  "name": "từ 0 đến 10",
   "fromKg": "5",
   "toKg": "10",
   "price": "400000",
