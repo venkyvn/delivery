@@ -36,8 +36,6 @@ class ReceiptServiceImpl @Autowired constructor(
     ),
     ReceiptService {
 
-
-        //TODO update later
     override fun search(searchFilter: BaseSearchCriteria<ReceiptSearch>): Page<ReceiptDto> {
         logger.info("search {}", searchFilter)
         val pageable = SearchHelper.getPageableObj(searchFilter)
@@ -48,15 +46,28 @@ class ReceiptServiceImpl @Autowired constructor(
             val nonNullProperties = ReceiptSearch::class.memberProperties.filter { it.get(search) != null }
             for (property in nonNullProperties) {
                 val fieldName = property.name
-                val fieldValue = property.get(search) as? String
-                if (!fieldValue.isNullOrBlank()) {
-                    spec = spec.and(BaseSpec<Receipt>().searchByFieldValue(fieldName, fieldValue))
+                val fieldValue = property.get(search)
+                logger.info("Processing field: {}, Value: {}", fieldName, fieldValue)
+
+                when (fieldValue) {
+                    is String -> {
+                        if (fieldValue.isNotBlank()) {
+                            spec = spec.and(BaseSpec<Receipt>().searchByFieldValue(fieldName, fieldValue))
+                        }
+                    }
+
+                    is Enum<*> -> {
+                        spec = spec.and(BaseSpec<Receipt>().searchByFieldValue(fieldName, fieldValue))
+                        // Directly use the enum value in the search
+
+                    }
+                    // Add more type checks if needed
                 }
             }
-
         }
 
         val page = this.getRepository().findAll(spec, pageable)
+        logger.info("Total elements found: {}, Content size: {}", page.totalElements, page.content.size)
         return PageImpl(toDTOs(page.content), pageable, page.totalElements)
     }
 
@@ -152,6 +163,9 @@ class ReceiptServiceImpl @Autowired constructor(
             packagingServiceFee = dto.packagingServiceFee
             packagingServiceQuantity = dto.packagingServiceQuantity
             totalAmount = dto.totalAmount
+            subPackages = dto.subPackages!!
+            billStatus = dto.billStatus
+            settlementStatus = dto.settlementStatus
         }
     }
 }

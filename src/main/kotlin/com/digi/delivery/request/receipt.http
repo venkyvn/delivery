@@ -4,15 +4,17 @@ Content-Type: application/json
 {
   "searchCriteria": {
     "orderNumber": "",
-    "receiptCode":"",
-    "senderName": "vuong",
-    "senderIdCard":"",
+    "receiptCode": "",
+    "senderName": "",
+    "senderIdCard": "",
     "senderPhone": "",
-    "receiverName":"",
+    "receiverName": "",
     "receiverIdCard": "",
-    "receiverPhone":""
+    "receiverPhone": "",
+    "billStatus": "CREATED",
+    "settlementStatus": "PENDING"
   },
-  "page": 1,
+  "page": 0,
   "pageSize": 5,
   "direction": "",
   "sortBy": ""
@@ -23,7 +25,7 @@ GET https://localhost:8080/api/v1/receipt/8
 ###
 DELETE https://localhost:8080/api/v1/receipt/7
 
-###
+### create receipt
 POST https://localhost:8080/api/v1/receipt
 Accept: */*
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIyNjAxNTE1fQ.ePTk0YQH9wh2P0OJs9qLuvnqHB0MylUsz4PPLU55CqNPoejNWXLLVzRjVwZVBa6f_W0M_FUzlYLnTvwNIZ0iYg
@@ -84,7 +86,19 @@ Content-Type: application/json
   ],
   "packagingServiceFee": "133.3",
   "packagingServiceQuantity": 1,
-  "totalAmount": "50"
+  "totalAmount": "50",
+  "subPackages": [
+    {
+      "detail": "sub package detail 1",
+      "note": "sub package note 1"
+    },
+    {
+      "detail": "sub package detail 2",
+      "note": "sub package note 1"
+    }
+  ],
+  "billStatus": "CREATED",
+  "settlementStatus": "PENDING"
 }
 
 ###

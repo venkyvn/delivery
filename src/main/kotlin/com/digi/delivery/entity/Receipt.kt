@@ -2,6 +2,8 @@ package com.digi.delivery.entity
 
 import com.digi.delivery.base.entity.BaseEntity
 import com.digi.delivery.dto.PackagingPriceDto
+import com.digi.delivery.entity.enumerate.BillStatusEnum
+import com.digi.delivery.entity.enumerate.SettlementStatusEnum
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import java.math.BigDecimal
@@ -93,6 +95,18 @@ class Receipt : BaseEntity() {
     @Column(name = "packaging_service_json", columnDefinition = "nvarchar")
     var packagingServiceJson: String = ""
 
+    @Column(name = "sub_package_json", columnDefinition = "nvarchar")
+    var subPackageJson: String = ""
+
+    @Column(name = "bill_status", columnDefinition = "nvarchar(100)")
+    @Enumerated(EnumType.STRING)
+    var billStatus: BillStatusEnum? = null
+
+    @Column(name = "settlement_status", columnDefinition = "nvarchar(100)")
+    @Enumerated(EnumType.STRING)
+    var settlementStatus: SettlementStatusEnum? = null
+
+
     @Transient
     private val objectMapper = ObjectMapper()
 
@@ -103,13 +117,32 @@ class Receipt : BaseEntity() {
         set(value) {
             packagingServiceJson = objectMapper.writeValueAsString(value)
         }
+
+    @set:Transient
+    @get:Transient
+    var subPackages: List<SubPackageDto>
+        get() = objectMapper.readValue(subPackageJson)
+        set(value) {
+            subPackageJson = objectMapper.writeValueAsString(value)
+        }
 }
+
 class PackagingServiceList {
     var packagingService: List<PackagingServiceDto>? = emptyList()
 }
+
+class SubPackageList {
+    var subPackage: List<SubPackageDto>? = emptyList()
+}
+
 
 class PackagingServiceDto {
     var quantity: Int? = 0
     var isReused: Boolean? = false
     var packagingPrice: PackagingPriceDto? = null
+}
+
+class SubPackageDto {
+    var detail: String? = ""
+    var note: String? = ""
 }

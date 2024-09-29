@@ -1,0 +1,17 @@
+GET https://localhost:8080/api/v1/delivery-config/3
+
+###
+POST https://localhost:8080/api/v1/delivery-config
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIyNjAxNTE1fQ.ePTk0YQH9wh2P0OJs9qLuvnqHB0MylUsz4PPLU55CqNPoejNWXLLVzRjVwZVBa6f_W0M_FUzlYLnTvwNIZ0iYg
+Content-Type: application/json
+
+{
+  "code": "code tiếng việt",
+  "name":"name tiếng việt",
+  "note": "note tiếng việt",
+  "percentage":"percentage tiếng việt"
+  }
+
+###
+

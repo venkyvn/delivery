@@ -4,7 +4,9 @@ import com.digi.delivery.base.entity.BaseEntity
 import com.digi.delivery.dto.search.ReceiptSearch
 import com.digi.delivery.entity.Commune
 import com.digi.delivery.util.SearchHelper
+import org.slf4j.LoggerFactory
 import org.springframework.data.jpa.domain.Specification
+import java.util.*
 import kotlin.reflect.full.memberProperties
 
 const val format = "%%s%"
@@ -21,9 +23,29 @@ class BaseSpec<E : BaseEntity> {
             cb.like(cb.lower(root.get("name")), String.format(SearchHelper.SEARCH_LIKE, name))
         }
 
-    fun searchByFieldValue(searchField: String, searchValue: String): Specification<E>? =
+    fun searchByFieldValue(searchField: String, searchValue: Any): Specification<E>? =
         Specification { root, _, cb ->
-            cb.like(cb.lower(root.get(searchField)), String.format(SearchHelper.SEARCH_LIKE, searchValue))
+            when (searchValue) {
+                is String -> {
+                    // Handle string search using LIKE for case-insensitive match
+                    cb.like(
+                        cb.lower(root.get(searchField)), String.format(
+                            SearchHelper.SEARCH_LIKE,
+                            searchValue.lowercase(Locale.getDefault())
+                        )
+                    )
+                }
+
+                is Enum<*> -> {
+                    cb.equal(root.get<Enum<*>>(searchField), searchValue)
+
+                }
+
+                else -> {
+                    // Handle other types if needed, for now, return null to indicate unsupported type
+                    null
+                }
+            }
         }
 
     //TODO: refactor later, only support string this time
@@ -42,8 +64,6 @@ class BaseSpec<E : BaseEntity> {
         return spec
     }
 }
-
-
 
 
 object CommuneSpec {

@@ -1,6 +1,9 @@
 package com.digi.delivery.dto
 
 import com.digi.delivery.entity.PackagingServiceDto
+import com.digi.delivery.entity.SubPackageDto
+import com.digi.delivery.entity.enumerate.BillStatusEnum
+import com.digi.delivery.entity.enumerate.SettlementStatusEnum
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.math.BigDecimal
 import java.util.*
@@ -60,6 +63,12 @@ class ReceiptDto : BaseDto() {
     var packagingServiceQuantity: Int = 1
 
     var totalAmount: BigDecimal = BigDecimal.ZERO
+
+    var subPackages: List<SubPackageDto>? = emptyList()
+
+    var billStatus: BillStatusEnum? = null
+
+    var settlementStatus: SettlementStatusEnum? = null
 
     var createdDate: Date? = null
 }
