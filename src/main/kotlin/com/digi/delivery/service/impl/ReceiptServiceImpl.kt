@@ -61,6 +61,16 @@ class ReceiptServiceImpl @Autowired constructor(
                         // Directly use the enum value in the search
 
                     }
+
+                    is Collection<*> -> {
+                        var combinedNullSpec: Specification<Receipt> = Specification.where(null)
+                        // Handle multiple values for the same field (e.g., ["PENDING", "IN_PROGRESS"])
+                        val combinedSpec = fieldValue.filterNotNull().fold(combinedNullSpec) { accSpec, value ->
+                            accSpec.or(BaseSpec<Receipt>().searchByFieldValue(fieldName, value))
+                        }
+
+                        spec = spec.and(combinedSpec)
+                    }
                     // Add more type checks if needed
                 }
             }

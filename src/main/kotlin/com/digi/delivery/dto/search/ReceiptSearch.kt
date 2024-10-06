@@ -12,6 +12,6 @@ class ReceiptSearch {
     val receiverName: String? = null
     val receiverIdCard: String? = null
     val receiverPhone: String? = null
-    val billStatus: BillStatusEnum ?= null
-    val settlementStatus: SettlementStatusEnum?= null
+    val billStatus: List<BillStatusEnum> = emptyList()
+    val settlementStatus: List<SettlementStatusEnum> = emptyList()
 }
